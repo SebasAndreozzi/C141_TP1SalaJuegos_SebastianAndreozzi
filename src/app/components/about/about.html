@@ -1,1 +1,9 @@
-<p>about works!</p>
+<div>
+  <h2>Datos Alumno:</h2>
+  <p>ID: {{ student()?.id }}</p>
+  <p>Nombre: {{ student()?.nombre }}</p>
+  <p>Avatar: <img [src]="student()?.avatar" [alt]="student()?.username" width="100" /></p>
+  <p>Username: {{ student()?.username }}</p>
+  <p>Ubicación: {{ student()?.ubicacion }}</p>
+  
+</div>
