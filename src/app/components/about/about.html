@@ -1,9 +1,15 @@
-<div>
-  <h2>Datos Alumno:</h2>
-  <p>ID: {{ student()?.id }}</p>
-  <p>Nombre: {{ student()?.nombre }}</p>
-  <p>Avatar: <img [src]="student()?.avatar" [alt]="student()?.username" width="100" /></p>
-  <p>Username: {{ student()?.username }}</p>
-  <p>Ubicación: {{ student()?.ubicacion }}</p>
-  
+<div class="data-conatiner">
+    <h2>Quién soy</h2>
+    <div class="student-data">
+        <div class="avatar-container">
+            <img [src]="student()?.avatar" [alt]="student()?.username" width="100" />
+            <span>ID: {{ student()?.id }}</span>
+        </div>
+        <div class="info-container">
+            <p><b>Nombre:</b> {{ student()?.nombre }}</p>
+            <p><b>Username:</b> {{ student()?.username }}</p>
+            <p><b>Ubicación:</b> {{ student()?.ubicacion }}</p>
+        </div>
+    </div>
+    
 </div>
