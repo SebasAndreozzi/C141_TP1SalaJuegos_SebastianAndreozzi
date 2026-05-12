@@ -3,6 +3,7 @@ import { Login } from './components/login/login';
 import { Signup } from './components/signup/signup';
 import { Home } from './components/home/home';
 import { About } from './components/about/about';
+import { studentExists } from './guards/studentExists';
 
 export const routes: Routes = [
     { path:'login', component: Login },
@@ -11,7 +12,7 @@ export const routes: Routes = [
 
     { path:'', component: Home },
 
-    { path:'about', component: About },
+    { path:'about', component: About, canActivate: [studentExists] },
 
     { path:'**', redirectTo: '' }
 ];
