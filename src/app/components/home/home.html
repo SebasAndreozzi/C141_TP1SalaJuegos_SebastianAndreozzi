@@ -1,1 +1,52 @@
-<p>home works!</p>
+<main>
+
+    @if (auth.isAuthenticated()) {
+        <div class="user-box">
+            <span >{{auth.userEmail() | userName}}</span>
+            <button (click)="auth.logout()">Cerrar Sesion</button>
+        </div>
+    }
+
+    <h2>Juegos</h2>
+
+    <div class="contenedor-juegos">
+
+        <div class="contenedor-link">
+            <a routerLink="/game/ahorcado" routerLinkActive="active">
+                <div class="juego" id="ahorcado">
+                    <img src="https://placehold.co/400x300.png" alt="Ahorcado">
+                    <span>Ahorcado</span>
+                </div>
+            </a>
+        </div>
+
+        <div class="contenedor-link">
+            <a routerLink="/game/mayormenor" routerLinkActive="active">
+                <div class="juego" id="Mayormenor">
+                        <img src="https://placehold.co/400x300.png" alt="Mayormenor">
+                        <span>Mayor o menor</span>
+                </div>
+            </a>
+        </div>
+        
+        <div class="contenedor-link">
+            <a routerLink="/game/preguntados" routerLinkActive="active">
+                <div class="juego" id="Preguntados">
+                        <img src="https://placehold.co/400x300.png" alt="Preguntados">
+                        <span>Preguntados</span>
+                </div>
+            </a>
+        </div>
+
+        <div class="contenedor-link">
+            <a routerLink="/game/nanograma" routerLinkActive="active">
+                <div class="juego" id="nanograma">
+                        <img src="https://placehold.co/400x300.png" alt="Danograma">
+                        <span>Nanograma</span>
+                </div>
+            </a>
+        </div>
+
+    </div>
+
+</main>

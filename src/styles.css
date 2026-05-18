@@ -1,1 +1,114 @@
 /* You can add global styles to this file, and also import other style files */
+.auth-box{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 10px;
+    font-family: "Montserrat", sans-serif;
+}
+
+.auth-title{
+    margin-top: 30px;
+    padding-bottom: 1%;
+}
+
+.auth-title h2{
+    font-weight: 700;
+    font-size: 35px;
+}
+
+.auth-form{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.auth-form-box{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.auth-form-box label{
+    font-weight: 500;
+}
+
+.form-button {
+    margin-top: 15px;
+    height: 50px;
+    width: 150px;
+    background-color: transparent;
+    border: 2px solid #fc3130;
+    border-radius: 15px;
+    cursor: pointer;
+    font-size: 15px;
+    font-weight: 500;
+    text-align: center;
+    transition: 300ms;
+}
+
+.form-button:disabled {
+    pointer-events: none;
+}
+
+.form-button:hover {
+    color: #fff;
+    background-color: #fc3130;
+}
+
+.auth-form-fast-login{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+
+.auth-form-fast-login .form-button{
+    margin-top: 10px;
+    border-color: #314ed0;
+}
+
+.auth-form-fast-login .form-button:hover{
+    background-color: #314ed0;
+}
+
+.form-alert{
+    color: #fc3130;
+    font-weight: 400;
+}
+
+@media (max-width: 520px){
+    .auth-form-fast-login{
+        flex-direction: column;
+    }
+}
+
+@media (max-width: 420px){
+    .form-alert{
+        font-size: 15px;
+        padding: 0 20px;
+    }
+}
+
+@media (max-width: 380px){
+    .auth-box{
+        font-size: 17px;
+    }
+    .auth-title h2{
+        font-size: 20px;
+    }
+    .auth-form-box label{
+        font-size: 15px;
+    }
+    .auth-form-box input{
+        font-size: 15px;
+    }
+    .form-button{
+        font-size: 15px;
+    }
+}
