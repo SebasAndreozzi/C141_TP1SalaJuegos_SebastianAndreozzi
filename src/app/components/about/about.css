@@ -1,0 +1,122 @@
+.cuerpo-container{
+    margin-top: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 30px;
+    padding: 0 20px;
+}
+
+.data-conatiner{
+    margin: 30px auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    font-family: "Montserrat", sans-serif;
+    font-weight: 500;
+    font-size: 20px;
+}
+
+.data-conatiner h2{
+    font-weight: 700;
+    font-size: 35px;
+}
+
+.student-data{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.avatar-container{
+    margin-right: 30px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.avatar-container img{
+    width: 150px;
+    height: auto;
+    border-radius: 20%;
+    margin-bottom: 10px;
+}
+
+.avatar-container span{
+    font-size: 20px;
+    font-weight: 300;
+}
+
+.juego-propio-container{
+    width: 60%;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.juego-propio-container h3{
+    font-weight: 600;
+    font-size: 25px;
+}
+
+.juego-propio-container h4{
+    font-weight: 600;
+    font-size: 20px;
+}
+
+.juego-propio-container p{
+    font-size: 20px;
+    padding: 0 20px;
+}
+
+@media (max-width: 900px){
+    .juego-propio-container{
+        width: 80%;
+    }
+}
+
+@media (max-width: 600px){
+    .data-conatiner{
+        font-size: 17px;
+    }
+
+    .avatar-container img{
+        width: 125px;
+    }
+
+    .avatar-container span{
+        font-size: 17px;
+    }
+
+    .juego-propio-container{
+        width: 100%;
+    }
+
+    .juego-propio-container h3{
+        font-size: 20px;
+    }
+
+    .juego-propio-container h4{
+        font-size: 19px;
+    }
+
+    .juego-propio-container p{
+        font-size: 17px;
+    }
+
+    @media (max-width: 380px){
+        .student-data{
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .avatar-container{
+            margin-right: 0px;
+        }
+    }
+}
+
