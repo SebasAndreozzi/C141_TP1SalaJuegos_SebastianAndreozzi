@@ -1,3 +1,11 @@
+ALUMNO: Sebastián Javier Andreozzi
+
+DEPLOY: https://tp1sala-juegossebasti-git-fe13d0-sebastian-andreozzi-s-projects.vercel.app?_vercel_share=PYDa7Jq2FluH5zuOCTIMIGxkQUsKoree
+
+TECNOLOGÍAS: BD con SUpabase
+             FrontEnd con Angular21
+             Deploy con Vercel
+             
 Sprint 1
 
 En este sprint cree los componentes:
