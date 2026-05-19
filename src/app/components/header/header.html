@@ -11,6 +11,8 @@
                 @if(!auth.isAuthenticated()){
                     <li><a routerLink="/login" routerLinkActive="active">Iniciar sesión</a></li>
                     <li><a routerLink="/signup" routerLinkActive="active">Registrarse</a></li>
+                }@else{
+                    <li><a routerLink="/chat" routerLinkActive="active">Chat</a></li>
                 }
                 
             </ul>

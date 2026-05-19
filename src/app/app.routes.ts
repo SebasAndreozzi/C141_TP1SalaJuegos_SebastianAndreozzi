@@ -33,7 +33,7 @@ export const routes: Routes = [
 
     ] },
 
-    { path:'chat', component: SalaChat },
+    { path:'chat', canActivate: [authGuard], component: SalaChat },
 
     {path:'', redirectTo:'home', pathMatch:'full'},
 
