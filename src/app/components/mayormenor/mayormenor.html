@@ -1,1 +1,23 @@
-<p>mayormenor works!</p>
+
+<h2>Mayor o menor</h2>
+
+<div class="contenedor-juego">
+
+  <h2>Puntos: {{ puntos }}</h2>
+
+  <img src="{{cartaActual.imagen}}" class="carta" alt="{{cartaActual.valor}}{{cartaActual.palo}}">
+  <img src="assets/cartas/red_back.png" class="carta" alt="back-card">
+
+  <div class="botones">
+
+    <button (click)="adivinar('mayor')">
+      Mayor
+    </button>
+
+    <button (click)="adivinar('menor')">
+      Menor
+    </button>
+
+  </div>
+
+</div>

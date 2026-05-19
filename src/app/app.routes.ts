@@ -6,7 +6,7 @@ import { About } from './components/about/about';
 import { studentExists } from './guards/studentExists';
 import { authGuard } from './guards/auth';
 import { Ahorcado } from './components/ahorcado/ahorcado';
-import { Mayormenor } from './components/mayormenor/mayormenor';
+import { MayorMenor } from './components/mayormenor/mayormenor';
 import { Preguntados } from './components/preguntados/preguntados';
 import { Nanograma } from './components/nanograma/nanograma';
 import { guestGuard } from './guards/guest';
@@ -21,11 +21,11 @@ export const routes: Routes = [
 
     { path:'about', component: About, canActivate: [studentExists] },
 
-    { path:'game', canActivate: [authGuard] , children:[
+    { path:'game', /*canActivate: [authGuard] ,*/ children:[
 
         { path:'ahorcado', component: Ahorcado },
         
-        { path:'mayormenor', component: Mayormenor},
+        { path:'mayormenor', component: MayorMenor},
 
         { path:'preguntados', component: Preguntados},
 

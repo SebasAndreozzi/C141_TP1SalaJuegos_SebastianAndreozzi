@@ -1,17 +1,17 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { Mayormenor } from './mayormenor';
+import { MayorMenor } from './mayormenor';
 
 describe('Mayormenor', () => {
-  let component: Mayormenor;
-  let fixture: ComponentFixture<Mayormenor>;
+  let component: MayorMenor;
+  let fixture: ComponentFixture<MayorMenor>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [Mayormenor],
+      imports: [MayorMenor],
     }).compileComponents();
 
-    fixture = TestBed.createComponent(Mayormenor);
+    fixture = TestBed.createComponent(MayorMenor);
     component = fixture.componentInstance;
     await fixture.whenStable();
   });
