@@ -20,65 +20,45 @@ export class MayorMenor {
   juegoFinalizado = signal<boolean>(false);
 
   mazo: Card[] = MAZO;
-
   cartaActual!: Card;
-
   indice = 0;
-
   puntos = 0;
 
   iniciarJuego() {
     
     this.mezclarMazo();
-
     this.indice = 0;
-
     this.puntos = 0;
-
     this.cartaActual = this.mazo[0];
-
     this.juegoIniciado.set(true);
-
     this.juegoFinalizado.set(false);
   }
 
   mezclarMazo() {
 
     this.mazo.sort(() => Math.random() - 0.5);
-
   }
 
   adivinar(eleccion: string) {
 
     const siguiente = this.mazo[this.indice + 1];
 
-      if (!siguiente) {
+    if (!siguiente) {
 
-        this.juegoFinalizado.set(true);
+      this.juegoFinalizado.set(true);
 
-        return;
-      }
+      return;
+    }
 
-      const acerto =
+    const acerto = (eleccion === 'mayor' && siguiente.valor > this.cartaActual.valor) || (eleccion === 'menor'&& siguiente.valor < this.cartaActual.valor) || (eleccion === 'igual' && siguiente.valor === this.cartaActual.valor);
 
-        (eleccion === 'mayor'
-        && siguiente.valor > this.cartaActual.valor)
+    if (acerto) {
+      this.puntos++;
 
-        ||
+    }
 
-        (eleccion === 'menor'
-        && siguiente.valor < this.cartaActual.valor);
-
-      if (acerto) {
-
-        this.puntos++;
-
-      }
-
-      this.indice++;
-
-      this.cartaActual = siguiente;
-
+    this.indice++;
+    this.cartaActual = siguiente;
   }
 
   async cargarResultado() {

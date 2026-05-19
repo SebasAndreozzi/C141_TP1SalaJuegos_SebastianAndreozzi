@@ -4,4 +4,4 @@ export interface Card {
   imagen: string;
 }
 
-type Palo = 'C' | 'D' | 'H' | 'S';
+type Palo = 'B' | 'C' | 'E' | 'O';

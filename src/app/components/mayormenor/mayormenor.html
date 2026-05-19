@@ -4,7 +4,7 @@
     <div class="pantalla-inicio">
 
       <img
-        src="assets/cartas/red_back.png"
+        src="assets/cartas/back.png"
         class="carta">
 
       <button (click)="iniciarJuego()">
@@ -18,7 +18,7 @@
         <h2>Puntos: {{ puntos }}</h2>
 
         <img src="{{cartaActual.imagen}}" class="carta" alt="{{cartaActual.valor}}{{cartaActual.palo}}">
-        <img src="assets/cartas/red_back.png" class="carta" alt="back-card">
+        <img src="assets/cartas/back.png" class="carta" alt="back-card">
 
         <div class="botones">
 
@@ -28,6 +28,10 @@
 
             <button (click)="adivinar('menor')" [disabled]="juegoFinalizado()">
             Menor
+            </button>
+
+             <button (click)="adivinar('igual')" [disabled]="juegoFinalizado()">
+            Igual
             </button>
 
             @if(juegoFinalizado()){
