@@ -21,8 +21,8 @@ export class MayorMenor {
 
   mazo: Card[] = MAZO;
   cartaActual!: Card;
-  indice = 0;
-  puntos = 0;
+  indice:number = 0;
+  puntos:number = 0;
 
   iniciarJuego() {
     

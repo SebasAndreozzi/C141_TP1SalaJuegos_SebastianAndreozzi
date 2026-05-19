@@ -1,1 +1,36 @@
-<p>ahorcado works!</p>
+<img src="assets/ahorcado/{{(6 - intentosRestantes)}}.png">
+
+@if (juegoTerminado) {
+  <h2>{{ gano ? 'Ganaste' : 'Perdiste' }}</h2>
+}
+
+<div class="palabra">
+
+  @for (letra of mostrarPalabra(); track $index) {
+    <span>
+      {{ letra }}
+    </span>
+  }
+
+</div>
+
+<div class="teclado">
+
+  @for (letra of abecedario; track letra) {
+
+    <button
+
+      (click)="seleccionarLetra(letra)"
+
+      [disabled]="
+        letrasElegidas.includes(letra)
+        || juegoTerminado
+      ">
+
+      {{ letra }}
+
+    </button>
+
+  }
+
+</div>
