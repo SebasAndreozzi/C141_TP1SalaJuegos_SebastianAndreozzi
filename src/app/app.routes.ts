@@ -10,6 +10,7 @@ import { Mayormenor } from './components/mayormenor/mayormenor';
 import { Preguntados } from './components/preguntados/preguntados';
 import { Nanograma } from './components/nanograma/nanograma';
 import { guestGuard } from './guards/guest';
+import { SalaChat } from './components/sala-chat/sala-chat';
 
 export const routes: Routes = [
     { path:'login', component: Login, canActivate: [guestGuard] },
@@ -31,6 +32,8 @@ export const routes: Routes = [
         {path:'nanograma', component: Nanograma}
 
     ] },
+
+    { path:'chat', component: SalaChat },
 
     {path:'', redirectTo:'home', pathMatch:'full'},
 
