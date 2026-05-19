@@ -6,7 +6,7 @@
   <div class="messages-list">
     @for (msg of chatService.mensajes(); track msg.id) {
       <div class="message-item">
-        <span class="user-tag">{{ msg.user_name }} </span>
+        <span class="user-tag" [appMensajePropio]="msg.user_name" [usuarioActivo]="userName()">{{ msg.user_name }} </span>
         <span class="msg-time">[{{ msg.created_at | hora }}]: </span>
         <span class="content">{{ msg.contenido }}</span>
       </div>
