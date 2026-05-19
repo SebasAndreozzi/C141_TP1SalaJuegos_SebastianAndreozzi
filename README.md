@@ -5,7 +5,16 @@ DEPLOY: https://tp1sala-juegossebasti-git-fe13d0-sebastian-andreozzi-s-projects.
 TECNOLOGÍAS: BD con SUpabase
              FrontEnd con Angular21
              Deploy con Vercel
-             
+
+Sprint 2
+En este sprint agregué funcionalidad de login al componente /login, agregue funcionalidad de registro al componente /signup con impácto en al base de datos. También agregué rutas a los distintos juegos accesibles desde la pantalla principal pero no modifique los componentes de los juegos.
+
+Agregué guards para asegurar que ciertas rutas y botonoes sean inaccseibles o accesibles teniendo en cuenta si hay o no hay un usuario loggeado.
+
+También agregué botones de inicio rápido con usuarios precargados para agilizar las pruebas.
+
++
+
 Sprint 1
 
 En este sprint cree los componentes:
