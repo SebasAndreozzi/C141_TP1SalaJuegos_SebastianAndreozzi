@@ -3,11 +3,12 @@ import { ChatService } from '../../services/chat';
 import { FormsModule } from '@angular/forms';
 import { AuthService } from '../../services/auth';
 import { UserNamePipe } from '../../pipes/userName';
+import { HoraPipe } from '../../pipes/hora'; 
 
 @Component({
   selector: 'app-chat',
   standalone: true,
-  imports: [FormsModule],
+  imports: [FormsModule, HoraPipe],
   templateUrl: './sala-chat.html',
   styleUrl: './sala-chat.css'
 })
