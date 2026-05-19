@@ -3,13 +3,13 @@ import { ChatService } from '../../services/chat';
 import { FormsModule } from '@angular/forms';
 import { AuthService } from '../../services/auth';
 import { UserNamePipe } from '../../pipes/userName';
-import { HoraPipe } from '../../pipes/hora';
+import { HourPipe } from '../../pipes/hour';
 import { MensajePropioDirective } from '../../directives/userActivo';
 
 @Component({
   selector: 'app-chat',
   standalone: true,
-  imports: [FormsModule, HoraPipe, MensajePropioDirective],
+  imports: [FormsModule, HourPipe, MensajePropioDirective],
   templateUrl: './sala-chat.html',
   styleUrl: './sala-chat.css'
 })
@@ -35,7 +35,7 @@ export class SalaChat {
     const texto = this.newMessage.trim();
 
     if (user_id && texto) {
-      await this.chatService.enviarMensajeConUsuario(texto, user_id, user_name);
+      await this.chatService.sendMessage(texto, user_id, user_name);
       this.newMessage = '';
     }
   }

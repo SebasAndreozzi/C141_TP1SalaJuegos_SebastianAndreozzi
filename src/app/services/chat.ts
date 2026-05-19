@@ -1,43 +1,43 @@
 import { inject, Injectable, signal, PLATFORM_ID } from '@angular/core';
 import { SupabaseService } from "./supabase";
 import { isPlatformBrowser } from '@angular/common';
-import { Mensaje } from '../models/mensaje';
+import { Message } from '../models/message';
 
 @Injectable({ providedIn: 'root' })
 export class ChatService {
   private supabase = inject(SupabaseService)
   private platformId = inject(PLATFORM_ID);
   // Usamos un Signal para que el HTML se actualice automáticamente
-  public mensajes = signal<Mensaje[]>([]);
+  public mensajes = signal<Message[]>([]);
 
   constructor() {
-    this.cargarMensajesIniciales();
+    this.loadInitialMessages();
 
      if (isPlatformBrowser(this.platformId)) {
-        this.escucharMensajesEnTiempoReal();
+        this.listenRealTimeMessages();
     }
   }
 
-  async cargarMensajesIniciales() {
+  async loadInitialMessages() {
     const { data } = await this.supabase.getClient()
       .from('mensajes')
       .select('*')
       .order('created_at', { ascending: true });
     
-    if (data) this.mensajes.set(data as Mensaje[]);
+    if (data) this.mensajes.set(data as Message[]);
   }
 
-  escucharMensajesEnTiempoReal() {
+  listenRealTimeMessages() {
     this.supabase.getClient()
       .channel('sala-publica')
       .on('postgres_changes', { event: 'INSERT', schema: 'public', table: 'mensajes' }, 
       async (payload) => {
-        this.cargarMensajesIniciales(); 
+        this.loadInitialMessages(); 
       })
       .subscribe();
   }
 
-    async enviarMensajeConUsuario(contenido: string, user_id: string, user_name: string) {
+    async sendMessage(contenido: string, user_id: string, user_name: string) {
 
         await this.supabase.getClient().from('mensajes').insert({
             contenido,

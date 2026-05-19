@@ -1,10 +1,10 @@
 import { Pipe, PipeTransform } from '@angular/core';
 
 @Pipe({
-  name: 'hora',
+  name: 'hour',
   standalone: true
 })
-export class HoraPipe implements PipeTransform {
+export class HourPipe implements PipeTransform {
 
   transform(value: string): string {
 
