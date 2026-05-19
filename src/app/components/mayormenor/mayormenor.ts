@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
 import { Card } from '../../models/card';
 import { SupabaseService } from '../../services/supabase';
 import { AuthService } from '../../services/auth';
@@ -16,6 +16,9 @@ export class MayorMenor {
   private supabase = inject(SupabaseService)
   private auth = inject(AuthService)
 
+  juegoIniciado = signal<boolean>(false);
+  juegoFinalizado = signal<boolean>(false);
+
   mazo: Card[] = MAZO;
 
   cartaActual!: Card;
@@ -24,14 +27,19 @@ export class MayorMenor {
 
   puntos = 0;
 
-  ngOnInit() {
-    this.crearMazo();
+  iniciarJuego() {
+    
     this.mezclarMazo();
+
+    this.indice = 0;
+
+    this.puntos = 0;
+
     this.cartaActual = this.mazo[0];
-  }
 
-  async crearMazo() {
+    this.juegoIniciado.set(true);
 
+    this.juegoFinalizado.set(false);
   }
 
   mezclarMazo() {
@@ -42,38 +50,38 @@ export class MayorMenor {
 
   adivinar(eleccion: string) {
 
-  const siguiente = this.mazo[this.indice + 1];
+    const siguiente = this.mazo[this.indice + 1];
 
-    if (!siguiente) {
+      if (!siguiente) {
 
-      this.finalizarJuego();
+        this.juegoFinalizado.set(true);
 
-      return;
-    }
+        return;
+      }
 
-    const acerto =
+      const acerto =
 
-      (eleccion === 'mayor'
-      && siguiente.valor > this.cartaActual.valor)
+        (eleccion === 'mayor'
+        && siguiente.valor > this.cartaActual.valor)
 
-      ||
+        ||
 
-      (eleccion === 'menor'
-      && siguiente.valor < this.cartaActual.valor);
+        (eleccion === 'menor'
+        && siguiente.valor < this.cartaActual.valor);
 
-    if (acerto) {
+      if (acerto) {
 
-      this.puntos++;
+        this.puntos++;
 
-    }
+      }
 
-    this.indice++;
+      this.indice++;
 
-    this.cartaActual = siguiente;
+      this.cartaActual = siguiente;
 
   }
 
-  async finalizarJuego() {
+  async cargarResultado() {
 
     await this.supabase.getClient()
       .from('partidas')

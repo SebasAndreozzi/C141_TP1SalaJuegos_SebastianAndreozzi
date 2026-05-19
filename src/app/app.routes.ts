@@ -21,7 +21,7 @@ export const routes: Routes = [
 
     { path:'about', component: About, canActivate: [studentExists] },
 
-    { path:'game', /*canActivate: [authGuard] ,*/ children:[
+    { path:'game', canActivate: [authGuard] , children:[
 
         { path:'ahorcado', component: Ahorcado },
         

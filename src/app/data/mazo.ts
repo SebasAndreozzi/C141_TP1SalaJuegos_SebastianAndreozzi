@@ -1,27 +1,6 @@
-import { Card, Palo } from "../models/card";
+import { Card } from "../models/card";
 
 export const MAZO:Card[] = [
-  {
-    valor: 1,
-    palo: 'C',
-    imagen: 'assets/cartas/1C.png'
-  },
-  {
-    valor: 1,
-    palo: 'D',
-    imagen: 'assets/cartas/AD.png'
-  },
-  {
-    valor: 1,
-    palo: 'H',
-    imagen: 'assets/cartas/AH.png'
-  },
-  {
-    valor: 1,
-    palo: 'S',
-    imagen: 'assets/cartas/AS.png'
-  },
-
    {
     valor: 1,
     palo: 'C',
@@ -62,6 +41,7 @@ export const MAZO:Card[] = [
     palo: 'S',
     imagen: 'assets/cartas/2S.png'
   },
+  /*
   {
     valor: 3,
     palo: 'C',
@@ -283,5 +263,5 @@ export const MAZO:Card[] = [
     valor: 13,
     palo: 'S',
     imagen: 'assets/cartas/KS.png'
-  }
+  }*/
 ];

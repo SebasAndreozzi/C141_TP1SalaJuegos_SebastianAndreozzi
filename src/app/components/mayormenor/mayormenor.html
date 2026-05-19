@@ -1,23 +1,46 @@
 
 <h2>Mayor o menor</h2>
+@if(!juegoIniciado()){
+    <div class="pantalla-inicio">
 
-<div class="contenedor-juego">
+      <img
+        src="assets/cartas/red_back.png"
+        class="carta">
 
-  <h2>Puntos: {{ puntos }}</h2>
+      <button (click)="iniciarJuego()">
+        Iniciar Juego
+      </button>
 
-  <img src="{{cartaActual.imagen}}" class="carta" alt="{{cartaActual.valor}}{{cartaActual.palo}}">
-  <img src="assets/cartas/red_back.png" class="carta" alt="back-card">
+    </div>
+}@else {
+    <div class="contenedor-juego">
 
-  <div class="botones">
+        <h2>Puntos: {{ puntos }}</h2>
 
-    <button (click)="adivinar('mayor')">
-      Mayor
-    </button>
+        <img src="{{cartaActual.imagen}}" class="carta" alt="{{cartaActual.valor}}{{cartaActual.palo}}">
+        <img src="assets/cartas/red_back.png" class="carta" alt="back-card">
 
-    <button (click)="adivinar('menor')">
-      Menor
-    </button>
+        <div class="botones">
 
-  </div>
+            <button (click)="adivinar('mayor')" [disabled]="juegoFinalizado()">
+            Mayor
+            </button>
 
-</div>
+            <button (click)="adivinar('menor')" [disabled]="juegoFinalizado()">
+            Menor
+            </button>
+
+            @if(juegoFinalizado()){
+                <button (click)="iniciarJuego()">
+                    Reiniciar
+                </button>
+
+                <button (click)="juegoIniciado.set(false)">
+                    Volver
+                </button>
+            }
+
+
+        </div>
+    </div>
+}
