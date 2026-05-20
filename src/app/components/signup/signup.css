@@ -1,20 +1,21 @@
 .signup-form-input{
     display: flex;
     flex-direction: row;
-    justify-content: center;
+    justify-content: flex-start;
     align-items: center;
     flex-wrap: wrap;
     gap: 30px;
+    margin-bottom: -15px;
 }
 
 .signup-form-input .auth-form-box{
     margin-bottom: 20px;
-    justify-content: flex-start;
-    align-items: center;
 }
 
 .signup-form-input .auth-info{
-    height: 252px;
+    justify-self: flex-start;
+    align-self: flex-start;
+
 }
 
 @media (max-width: 550px){
