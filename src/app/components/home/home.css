@@ -57,6 +57,7 @@ h2{
     text-decoration: none;
     border-radius: 30px;
     transition: 300ms;
+    background-color: #1fbd10;
 }
 
 .contenedor-link a:hover{
@@ -80,7 +81,7 @@ h2{
     margin: 10px;
     font-weight: 600;
     font-size: 15px;
-    color: #000;
+    color: #fff;
 }
 
 @media (max-width: 900px){
