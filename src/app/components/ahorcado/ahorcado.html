@@ -17,20 +17,7 @@
 <div class="teclado">
 
   @for (letra of abecedario; track letra) {
-
-    <button
-
-      (click)="seleccionarLetra(letra)"
-
-      [disabled]="
-        letrasElegidas.includes(letra)
-        || juegoTerminado
-      ">
-
-      {{ letra }}
-
-    </button>
-
+    <button (click)="seleccionarLetra(letra)" [disabled]=" letrasElegidas.includes(letra) || juegoTerminado ">{{ letra }}</button>
   }
 
 </div>
