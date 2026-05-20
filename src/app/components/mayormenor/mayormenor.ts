@@ -1,8 +1,10 @@
 import { Component, inject, signal } from '@angular/core';
 import { Card } from '../../models/card';
-import { SupabaseService } from '../../services/supabase';
+import { PuntajeService } from '../../services/puntaje';
 import { AuthService } from '../../services/auth';
 import { MAZO } from '../../data/mazo';
+import { Puntaje, Tabla } from '../../models/puntaje';
+import { UserNamePipe } from '../../pipes/userName';
 
 @Component({
   selector: 'app-mayor-menor',
@@ -13,22 +15,23 @@ import { MAZO } from '../../data/mazo';
 
 export class MayorMenor {
 
-  private supabase = inject(SupabaseService)
+  private supaPuntaje = inject(PuntajeService);
   private auth = inject(AuthService)
+  userNameFormat = new UserNamePipe();
 
   juegoIniciado = signal<boolean>(false);
   juegoFinalizado = signal<boolean>(false);
 
   mazo: Card[] = MAZO;
   cartaActual!: Card;
-  indice:number = 0;
-  puntos:number = 0;
+  indice!:number;
+  puntaje!:number;
 
   iniciarJuego() {
     
     this.mezclarMazo();
     this.indice = 0;
-    this.puntos = 0;
+    this.puntaje = 0;
     this.cartaActual = this.mazo[0];
     this.juegoIniciado.set(true);
     this.juegoFinalizado.set(false);
@@ -39,21 +42,22 @@ export class MayorMenor {
     this.mazo.sort(() => Math.random() - 0.5);
   }
 
-  adivinar(eleccion: string) {
+  async adivinar(eleccion: string) {
 
     const siguiente = this.mazo[this.indice + 1];
 
     if (!siguiente) {
 
       this.juegoFinalizado.set(true);
+      await this.guardarPartida();
 
       return;
     }
 
-    const acerto = (eleccion === 'mayor' && siguiente.valor > this.cartaActual.valor) || (eleccion === 'menor'&& siguiente.valor < this.cartaActual.valor) || (eleccion === 'igual' && siguiente.valor === this.cartaActual.valor);
+    const acierto = (eleccion === 'mayor' && siguiente.valor > this.cartaActual.valor) || (eleccion === 'menor'&& siguiente.valor < this.cartaActual.valor);
 
-    if (acerto) {
-      this.puntos++;
+    if (acierto) {
+      this.puntaje++;
 
     }
 
@@ -61,17 +65,17 @@ export class MayorMenor {
     this.cartaActual = siguiente;
   }
 
-  async cargarResultado() {
+  async guardarPartida() {
 
-    await this.supabase.getClient()
-      .from('partidas')
-      .insert({
+    const table: Tabla = 'mayormenorPuntaje'
+  
+    const payload: Puntaje = {
+      puntaje: this.puntaje,
+      uid: this.auth.user()?.id,
+      user_name: this.userNameFormat.transform(this.auth.userEmail())
+    }
 
-        user_id: this.auth.user()?.id,
-
-        puntos: this.puntos
-
-      });
+    await this.supaPuntaje.guardarPuntaje(table, payload);
 
   }
 

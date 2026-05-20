@@ -10,7 +10,7 @@ export class PuntajeService {
 
   async guardarPuntaje(table: string, payload: Puntaje): Promise<void>{
     
-    const { data, error } = await this.supabase.getClient().from(table).insert(payload);
+    const { error } = await this.supabase.getClient().from(table).insert(payload);
 
     if(error){
         console.log(error)

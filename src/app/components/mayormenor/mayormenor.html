@@ -15,7 +15,7 @@
 }@else {
     <div class="contenedor-juego">
 
-        <h2>Puntos: {{ puntos }}</h2>
+        <h2>Puntaje: {{ puntaje }}</h2>
 
         <img src="{{cartaActual.imagen}}" class="carta" alt="{{cartaActual.valor}}{{cartaActual.palo}}">
         <img src="assets/cartas/back.png" class="carta" alt="back-card">
@@ -28,10 +28,6 @@
 
             <button (click)="adivinar('menor')" [disabled]="juegoFinalizado()">
             Menor
-            </button>
-
-             <button (click)="adivinar('igual')" [disabled]="juegoFinalizado()">
-            Igual
             </button>
 
             @if(juegoFinalizado()){

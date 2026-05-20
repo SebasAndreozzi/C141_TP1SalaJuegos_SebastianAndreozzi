@@ -15,17 +15,17 @@ export class Ahorcado {
 
   private auth = inject(AuthService)
   private supaPuntaje = inject(PuntajeService);
-   userNameFormat = new UserNamePipe();
+  userNameFormat = new UserNamePipe();
 
   palabras: string[] = PALABRAS;
 
   abecedario: string[] = ABC.split('');
 
-  palabraSecreta: string = '';
+  palabraSecreta!: string;
 
-  letrasElegidas: string[] = [];
+  letrasElegidas!: string[];
 
-  intentosRestantes: number = 6;
+  intentosRestantes!: number;
 
   juegoIniciado = signal<boolean>(false);
 
@@ -33,9 +33,9 @@ export class Ahorcado {
 
   gano = signal<boolean>(false);
 
-  inicioPartida = 0;
+  inicioPartida!: number;
 
-  puntaje: number= 0
+  puntaje!: number;
 
   iniciarJuego() {
 
