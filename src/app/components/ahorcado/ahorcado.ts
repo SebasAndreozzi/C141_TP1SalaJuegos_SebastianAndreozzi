@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, signal } from '@angular/core';
 import { PALABRAS, ABC } from '../../data/palabras';
 
 @Component({
@@ -19,13 +19,17 @@ export class Ahorcado {
 
   intentosRestantes: number = 6;
 
-  juegoTerminado = false;
+  juegoIniciado = signal<boolean>(false);
 
-  gano = false;
+  rondaTerminada = signal<boolean>(false);
+
+  gano = signal<boolean>(false);
 
   //inicioPartida = 0;
 
-  ngOnInit() {
+  iniciarJuego() {
+
+    this.juegoIniciado.set(true);
 
     const indice = Math.floor(
       Math.random() * this.palabras.length
@@ -37,9 +41,9 @@ export class Ahorcado {
 
     this.intentosRestantes = 6;
 
-    this.juegoTerminado = false;
+    this.rondaTerminada.set(false);
 
-    this.gano = false;
+    this.gano.set(false);
 
     //this.inicioPartida = Date.now();
 
@@ -69,9 +73,9 @@ export class Ahorcado {
 
   if (gano) {
 
-    this.juegoTerminado = true;
+    this.rondaTerminada.set(true);
 
-    this.gano = true;
+    this.gano.set(true);
 
     //this.guardarPartida();
 
@@ -79,9 +83,9 @@ export class Ahorcado {
 
   if (this.intentosRestantes <= 0) {
 
-      this.juegoTerminado = true;
+      this.rondaTerminada.set(true);
 
-      this.gano = false;
+      this.gano.set(false);
 
       //this.guardarPartida();
 

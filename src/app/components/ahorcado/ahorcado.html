@@ -1,23 +1,54 @@
-<img src="assets/ahorcado/{{(6 - intentosRestantes)}}.png">
 
-@if (juegoTerminado) {
-  <h2>{{ gano ? 'Ganaste' : 'Perdiste' }}</h2>
+<h2>Ahorcado</h2>
+@if(!juegoIniciado()){
+  <div class="pantalla-inicio">
+
+    <img
+      src="assets/ahorcado/inicio.png"
+      class="carta">
+
+    <button (click)="iniciarJuego()">
+      Iniciar Juego
+    </button>
+
+  </div>
+}@else{
+  
+  @if (rondaTerminada()) {
+    <h2>{{ gano() ? 'Ganaste' : 'Perdiste' }}</h2>
+  }
+
+  @if(gano()){
+    <img src="assets/ahorcado/victoria.png">
+  }@else{
+    <img src="assets/ahorcado/{{(6 - intentosRestantes)}}.png">
+  }
+
+  <div class="palabra">
+
+    @for (letra of mostrarPalabra(); track $index) {
+      <span>
+        {{ letra }}
+      </span>
+    }
+
+  </div>
+
+  <div class="teclado">
+
+    @for (letra of abecedario; track letra) {
+      <button (click)="seleccionarLetra(letra)" [disabled]=" letrasElegidas.includes(letra) || rondaTerminada() ">{{ letra }}</button>
+    }
+
+  </div>
+
+  @if (rondaTerminada()) {
+    <button (click)="iniciarJuego()">
+        Reiniciar
+    </button>
+
+    <button (click)="juegoIniciado.set(false)">
+        Volver
+    </button>
+  }
 }
-
-<div class="palabra">
-
-  @for (letra of mostrarPalabra(); track $index) {
-    <span>
-      {{ letra }}
-    </span>
-  }
-
-</div>
-
-<div class="teclado">
-
-  @for (letra of abecedario; track letra) {
-    <button (click)="seleccionarLetra(letra)" [disabled]=" letrasElegidas.includes(letra) || juegoTerminado ">{{ letra }}</button>
-  }
-
-</div>
