@@ -1,5 +1,9 @@
-import { Component, signal } from '@angular/core';
+import { Component, signal, inject } from '@angular/core';
 import { PALABRAS, ABC } from '../../data/palabras';
+import { PuntajeService } from '../../services/puntaje';
+import { Puntaje, Tabla } from '../../models/puntaje';
+import { AuthService } from '../../services/auth';
+import { UserNamePipe } from '../../pipes/userName';
 
 @Component({
   selector: 'app-ahorcado',
@@ -8,6 +12,10 @@ import { PALABRAS, ABC } from '../../data/palabras';
   styleUrl: './ahorcado.css',
 })
 export class Ahorcado {
+
+  private auth = inject(AuthService)
+  private supaPuntaje = inject(PuntajeService);
+   userNameFormat = new UserNamePipe();
 
   palabras: string[] = PALABRAS;
 
@@ -25,7 +33,9 @@ export class Ahorcado {
 
   gano = signal<boolean>(false);
 
-  //inicioPartida = 0;
+  inicioPartida = 0;
+
+  puntaje: number= 0
 
   iniciarJuego() {
 
@@ -45,7 +55,7 @@ export class Ahorcado {
 
     this.gano.set(false);
 
-    //this.inicioPartida = Date.now();
+    this.inicioPartida = Date.now();
 
   }
 
@@ -77,7 +87,7 @@ export class Ahorcado {
 
     this.gano.set(true);
 
-    //this.guardarPartida();
+    this.guardarPartida();
 
   }
 
@@ -87,37 +97,28 @@ export class Ahorcado {
 
       this.gano.set(false);
 
-      //this.guardarPartida();
+      this.guardarPartida();
 
     }
 
   }
-/*
+
   async guardarPartida() {
 
-  const tiempoFinal = Math.floor(
+    const tiempoFinal = Math.floor( (Date.now() - this.inicioPartida) / 1000 );
 
-    (Date.now() - this.inicioPartida)
-    / 1000
+    this.puntaje = Math.floor((this.intentosRestantes / tiempoFinal) * 100);
 
-  );
+    const table: Tabla = 'ahorcadoPuntaje'
 
-  await this.supabase
-    .getClient()
-    .from('partidas_ahorcado')
-    .insert({
+    const payload: Puntaje = {
+      puntaje: this.puntaje,
+      uid: this.auth.user()?.id,
+      user_name: this.userNameFormat.transform(this.auth.userEmail())
+    }
 
-      user_id: this.auth.user()?.id,
-
-      gano: this.gano,
-
-      tiempo: tiempoFinal,
-
-      letras_seleccionadas:
-        this.letrasElegidas.length
-
-    });
-
-}*/
+    await this.supaPuntaje.guardarPuntaje(table, payload);
+      
+  }
 
 }
