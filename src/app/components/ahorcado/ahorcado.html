@@ -1,54 +1,56 @@
-
-<h2>Ahorcado</h2>
-@if(!juegoIniciado()){
-  <div class="pantalla-inicio">
-
-    <img
-      src="assets/ahorcado/inicio.png"
-      class="carta">
-
-    <button (click)="iniciarJuego()">
-      Iniciar Juego
-    </button>
-
-  </div>
-}@else{
-  
-  @if (rondaTerminada()) {
-    <h2>{{ gano() ? 'Ganaste' : 'Perdiste' }}</h2>
-  }
-
-  @if(gano()){
-    <img src="assets/ahorcado/victoria.png">
+<main>
+  <h2>Ahorcado</h2>
+  @if(!juegoIniciado()){
+    <div class="pantalla-inicio">
+      <img src="assets/ahorcado/inicio.png" alt="arbol-inicio">
+      <button class="juego-button" (click)="iniciarJuego()"> Iniciar Juego </button>
+    </div>
   }@else{
-    <img src="assets/ahorcado/{{(6 - intentosRestantes)}}.png">
-  }
-
-  <div class="palabra">
-
-    @for (letra of mostrarPalabra(); track $index) {
-      <span>
-        {{ letra }}
-      </span>
+    
+    @if (rondaTerminada()) {
+      <h3>{{ gano() ? 'Ganaste' : 'Perdiste' }}</h3>
     }
 
-  </div>
+    <div class="juego-container">
 
-  <div class="teclado">
+      @if(gano()){
+        <img src="assets/ahorcado/victoria.png">
+      }@else{
+        <img src="assets/ahorcado/{{(6 - intentosRestantes)}}.png">
+      }
 
-    @for (letra of abecedario; track letra) {
-      <button (click)="seleccionarLetra(letra)" [disabled]=" letrasElegidas.includes(letra) || rondaTerminada() ">{{ letra }}</button>
+      <div class="juego">
+        <div class="zona-superior"></div>
+
+        <div class="palabra">
+          @for (letra of mostrarPalabra(); track $index) {
+            <span>{{ letra }}</span>
+          }
+        </div>
+
+        <div class="teclado">
+
+          @for (letra of abecedario; track letra) {
+            <button (click)="seleccionarLetra(letra)" [disabled]=" letrasElegidas.includes(letra) || rondaTerminada() ">{{ letra }}</button>
+          }
+
+        </div>
+      </div>
+    </div>
+
+    @if (rondaTerminada()) {
+
+      <div class="juego-button-container">
+        <button (click)="iniciarJuego()" class="juego-button">
+            Reiniciar
+        </button>
+
+        <button (click)="juegoIniciado.set(false)" class="juego-button">
+            Volver
+        </button>
+      </div>
     }
-
-  </div>
-
-  @if (rondaTerminada()) {
-    <button (click)="iniciarJuego()">
-        Reiniciar
-    </button>
-
-    <button (click)="juegoIniciado.set(false)">
-        Volver
-    </button>
   }
-}
+  
+
+</main>
