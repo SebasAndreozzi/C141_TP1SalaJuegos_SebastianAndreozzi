@@ -1,0 +1,29 @@
+.signup-form-input{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 30px;
+}
+
+.signup-form-input .auth-form-box{
+    margin-bottom: 20px;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.signup-form-input .auth-info{
+    height: 252px;
+}
+
+@media (max-width: 550px){
+    .signup-form-input{
+        flex-direction: column;
+        gap: 0px;
+    }
+
+    .signup-form-input .auth-info{
+        height: inherit;
+    }
+}
