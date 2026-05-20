@@ -1,0 +1,109 @@
+main{
+    margin: 0 auto;
+    font-family: "Montserrat", sans-serif;
+}
+
+.user-box{
+    margin-top: 12px;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 10px;
+
+}
+
+.user-box button{
+    margin-right: 12px;
+    padding: 5px 10px;
+    border: 0;
+    border-radius: 5px;
+    color: #fff;
+    background-color: #1EBC10;
+    transition: 300ms;
+}
+
+.user-box button:hover{
+    color: #1EBC10;
+    background: #fff;
+}
+
+h2{
+    margin-top: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: 700;
+    font-size: 35px;
+}
+
+.contenedor-juegos{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.contenedor-link{
+    width: 50%;
+    margin-top: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.contenedor-link a{
+    display: inline-block;
+    text-decoration: none;
+    border-radius: 30px;
+    transition: 300ms;
+}
+
+.contenedor-link a:hover{
+    box-shadow: #fc3130 0px 8px 24px;
+    transform: translateY(-2px);
+}
+
+.juego{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.juego img{
+    border-top-left-radius: 30px;
+    border-top-right-radius: 30px;
+}
+
+.juego span{
+    margin: 10px;
+    font-weight: 600;
+    font-size: 15px;
+    color: #000;
+}
+
+@media (max-width: 900px){
+    .juego img{
+        width: 300px;
+    }
+}
+
+@media (max-width: 750px){
+    .juego img{
+        width: 250px;
+    }
+}
+
+@media (max-width: 550px){
+    .contenedor-juegos{
+        flex-wrap: nowrap;
+        flex-direction: column;
+    }
+}
+
+@media (max-width: 380px){
+    h2{
+        font-size: 25px;
+    }
+}

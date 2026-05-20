@@ -1,1 +1,42 @@
-<p>login works!</p>
+
+<div class="auth-box">
+
+    <div class="auth-title"><h2>Iniciar sesión</h2></div>
+
+    <form (ngSubmit)="onSubmit()" class="auth-form" >
+
+        @if(error()){
+            <div class="form-alert"><span>{{ error() }}</span></div>
+        }
+
+        <div class="auth-form-box">
+            <label for="email">Email</label>
+            <input type="text" id="email" placeholder="Email" [(ngModel)]="email" name="email" required email #emailField = "ngModel">
+            @if (emailField.invalid && emailField.touched){
+                <div class="form-alert"><span>Correo Invalido</span></div>
+            }
+        </div>
+        <div class="auth-form-box">
+            <label for="password">Password</label>
+            <input type="password" id="password" placeholder="Password" [(ngModel)]="password" name="password" required minlength="6" #passField = "ngModel">
+            @if (passField.invalid && passField.touched){
+                <div class="form-alert"><span>La contraseña debe tener al menos 6 caracteres</span></div>
+            }
+        </div>
+        
+        <button class="form-button" type="submit" [disabled]="loading()">
+            @if(loading()){
+                Cargando...
+            }@else{
+                Iniciar Sesión
+            }
+        </button>
+        
+        <div class="auth-form-fast-login">
+            <button class="form-button" type="button" (click)="fastLogin1()">Inicio rápido 1</button>
+            <button class="form-button" type="button" (click)="fastLogin2()">Inicio rápido 2</button>
+            <button class="form-button" type="button" (click)="fastLogin3()">Inicio rápido 3</button>
+        </div>
+        
+    </form>
+</div>
