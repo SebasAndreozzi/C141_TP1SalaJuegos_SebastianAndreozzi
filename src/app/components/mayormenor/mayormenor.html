@@ -1,46 +1,41 @@
+    <main>
+    <h2>Mayor o menor</h2>
+    @if(!juegoIniciado()){
+        <div class="pantalla-inicio">
 
-<h2>Mayor o menor</h2>
-@if(!juegoIniciado()){
-    <div class="pantalla-inicio">
+            <img src="assets/cartas/inicio.png">
 
-      <img
-        src="assets/cartas/back.png"
-        class="carta">
-
-      <button (click)="iniciarJuego()">
-        Iniciar Juego
-      </button>
-
-    </div>
-}@else {
-    <div class="contenedor-juego">
-
-        <h2>Puntaje: {{ puntaje }}</h2>
-
-        <img src="{{cartaActual.imagen}}" class="carta" alt="{{cartaActual.valor}}{{cartaActual.palo}}">
-        <img src="assets/cartas/back.png" class="carta" alt="back-card">
-
-        <div class="botones">
-
-            <button (click)="adivinar('mayor')" [disabled]="juegoFinalizado()">
-            Mayor
+            <button (click)="iniciarJuego()" class="juego-button">
+                Iniciar Juego
             </button>
-
-            <button (click)="adivinar('menor')" [disabled]="juegoFinalizado()">
-            Menor
-            </button>
-
-            @if(juegoFinalizado()){
-                <button (click)="iniciarJuego()">
-                    Reiniciar
-                </button>
-
-                <button (click)="juegoIniciado.set(false)">
-                    Volver
-                </button>
-            }
-
 
         </div>
-    </div>
-}
+    }@else {
+        <div class="juego-container">
+
+            <h3>Puntaje: {{ puntaje }}</h3>
+
+            <div class="cartas-container">
+                <div class="carta-actual" [class.slide-in]="animando()">
+                    <img src="{{cartaActual.imagen}}" class="carta" alt="{{cartaActual.valor}}{{cartaActual.palo}}">
+                </div>
+                <img src="assets/cartas/back.png" class="carta carta-mazo" alt="back-card">
+            </div>
+
+            <div class="juego-button-container">
+
+                <button (click)="adivinar('mayor')" [disabled]="juegoFinalizado()" class="juego-button">Mayor</button>
+
+                <button (click)="adivinar('menor')" [disabled]="juegoFinalizado()" class="juego-button">Menor</button>
+
+                @if(juegoFinalizado()){
+                    <button (click)="iniciarJuego()" class="juego-button">Reiniciar</button>
+                    <button (click)="juegoIniciado.set(false)" class="juego-button">Volver</button>
+                }
+
+            </div>
+
+        </div>
+    }
+
+</main>

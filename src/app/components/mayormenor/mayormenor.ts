@@ -21,6 +21,7 @@ export class MayorMenor {
 
   juegoIniciado = signal<boolean>(false);
   juegoFinalizado = signal<boolean>(false);
+  animando = signal<boolean>(false);
 
   mazo: Card[] = MAZO;
   cartaActual!: Card;
@@ -63,6 +64,11 @@ export class MayorMenor {
 
     this.indice++;
     this.cartaActual = siguiente;
+    this.animando.set(true);
+  
+    setTimeout(() => {
+      this.animando.set(false);
+    }, 300);
   }
 
   async guardarPartida() {
