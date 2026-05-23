@@ -1,1 +1,43 @@
-<p>preguntados works!</p>
+<main>
+    <h2>Preguntados</h2>
+
+     @if(!juegoIniciado()){
+        <div class="pantalla-inicio">
+
+            <img src="assets/cartas/inicio.png" alt="inicio">
+
+            <button (click)="iniciarJuego()" class="juego-button" [disabled]="loading()">
+                 @if(loading()){
+                Cargando...
+                }@else{
+                    Iniciar juego
+                }
+            </button>
+
+        </div>
+    }@else {
+
+        <div class="contenedor">
+
+            <h3>Pregunta {{ indicePregunta().valueOf() + 1 }}</h3>
+            <h3>Puntaje: {{ puntaje().valueOf() }}/10</h3>
+            <h3>{{ preguntaActual().pregunta }}</h3>
+
+            <div class="opciones">
+
+                @for (opcion of opciones; track opcion) {
+
+                <button
+                    (click)="responder(opcion)">
+
+                    {{ opcion }}
+
+                </button>
+
+                }
+
+            </div>
+
+        </div>
+    }
+</main>
