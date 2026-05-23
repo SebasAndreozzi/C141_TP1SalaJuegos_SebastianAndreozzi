@@ -6,10 +6,6 @@
       <button class="juego-button" (click)="iniciarJuego()"> Iniciar Juego </button>
     </div>
   }@else{
-    
-    @if (rondaTerminada()) {
-      <h3>{{ gano() ? 'Ganaste' : 'Perdiste' }}</h3>
-    }
 
     <div class="juego-container">
 
@@ -37,19 +33,6 @@
         </div>
       </div>
     </div>
-
-    @if (rondaTerminada()) {
-
-      <div class="juego-button-container">
-        <button (click)="iniciarJuego()" class="juego-button">
-            Reiniciar
-        </button>
-
-        <button (click)="juegoIniciado.set(false)" class="juego-button">
-            Volver
-        </button>
-      </div>
-    }
   }
   
 

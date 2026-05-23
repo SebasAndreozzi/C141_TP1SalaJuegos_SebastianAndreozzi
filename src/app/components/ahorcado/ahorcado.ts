@@ -4,6 +4,7 @@ import { PuntajeService } from '../../services/puntaje';
 import { Puntaje, Tabla } from '../../models/puntaje';
 import { AuthService } from '../../services/auth';
 import { UserNamePipe } from '../../pipes/userName';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-ahorcado',
@@ -118,7 +119,34 @@ export class Ahorcado {
     }
 
     await this.supaPuntaje.guardarPuntaje(table, payload);
+    this.mostrarFinPartida();
       
   }
 
+  mostrarFinPartida() {
+      Swal.fire({
+        title: (this.gano() ? 'Ganaste :D' : 'Perdiste :('),
+        html: `
+          <div style="font-size: 1.2rem; margin-bottom: 1rem;">
+            Puntaje final: ${this.puntaje}
+          </div>
+          <img src="assets/ahorcado/${(this.gano() ? 'victoria' : '6')}.png" alt="Imagen final" style="max-width: 150px;">
+        `,
+        showCancelButton: true,
+        confirmButtonText: 'Reiniciar',
+        cancelButtonText: 'Volver al inicio',
+        reverseButtons: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#fc3130'
+      }).then((result) => {
+        if (result.isConfirmed) {
+          this.iniciarJuego();
+        } else if (result.dismiss === Swal.DismissReason.cancel) {
+          this.juegoIniciado.set(false);
+        }
+      });
+    }
+
 }
+
+
