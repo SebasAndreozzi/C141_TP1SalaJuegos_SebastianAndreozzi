@@ -72,8 +72,9 @@ export class Preguntados {
       return;}
 
     this.opciones = [
-      pregunta.respuesta_correcta,
-      pregunta.respuestas_incorrectas[0], ...pregunta.respuestas_incorrectas.slice(1)
+      this.limpiarTexto(pregunta.respuesta_correcta),
+      this.limpiarTexto(pregunta.respuestas_incorrectas[0]),
+      ...pregunta.respuestas_incorrectas.slice(1).map((o) => this.limpiarTexto(o))
     ];
 
     this.mezclarOpciones();
@@ -150,5 +151,15 @@ export class Preguntados {
         }
       });
     }
+
+  limpiarTexto(texto: string): string {
+
+    const txt = document.createElement('textarea');
+
+    txt.innerHTML = texto;
+
+    return txt.value;
+
+  }
 
 }
