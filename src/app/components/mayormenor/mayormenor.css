@@ -31,6 +31,10 @@ h3{
     gap: 20px
 }
 
+.pantalla-inicio img{
+    min-width: 350px;
+}
+
 .pantalla-inicio .juego-button{
     width: 150px;
 }
