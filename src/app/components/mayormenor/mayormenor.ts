@@ -5,6 +5,7 @@ import { AuthService } from '../../services/auth';
 import { MAZO } from '../../data/mazo';
 import { Puntaje, Tabla } from '../../models/puntaje';
 import { UserNamePipe } from '../../pipes/userName';
+import Swal from 'sweetalert2'
 
 @Component({
   selector: 'app-mayor-menor',
@@ -51,6 +52,8 @@ export class MayorMenor {
 
       this.juegoFinalizado.set(true);
       await this.guardarPartida();
+      this.mostrarFinPartida();
+
 
       return;
     }
@@ -83,6 +86,30 @@ export class MayorMenor {
 
     await this.supaPuntaje.guardarPuntaje(table, payload);
 
+  }
+
+  mostrarFinPartida() {
+    Swal.fire({
+      title: 'Partida terminada',
+      html: `
+        <div style="font-size: 1.2rem; margin-bottom: 1rem;">
+          Puntaje final: ${this.puntaje}
+        </div>
+        <img src="assets/cartas/inicio.png" alt="Imagen final" style="max-width: 150px;">
+      `,
+      showCancelButton: true,
+      confirmButtonText: 'Reiniciar',
+      cancelButtonText: 'Volver al inicio',
+      reverseButtons: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#fc3130'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.iniciarJuego();
+      } else if (result.dismiss === Swal.DismissReason.cancel) {
+        this.juegoIniciado.set(false);
+      }
+    });
   }
 
 }

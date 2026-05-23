@@ -28,11 +28,6 @@
 
                 <button (click)="adivinar('menor')" [disabled]="juegoFinalizado()" class="juego-button">Menor</button>
 
-                @if(juegoFinalizado()){
-                    <button (click)="iniciarJuego()" class="juego-button">Reiniciar</button>
-                    <button (click)="juegoIniciado.set(false)" class="juego-button">Volver</button>
-                }
-
             </div>
 
         </div>
