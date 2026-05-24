@@ -3,7 +3,7 @@
     @if(!juegoIniciado()){
         <div class="pantalla-inicio">
 
-            <img src="assets/cartas/inicio.png" alt="inicio">
+            <img src="assets/nanograma/inicio.png" alt="inicio">
 
             <button (click)="iniciarJuego()" class="juego-button">
                 Iniciar Juego
@@ -15,7 +15,7 @@
 
         <div class="intentos">
             <img src="assets/nanograma/heart.png" alt="heart">
-            <p>{{ intentosRestantes }}/5</p>
+            <span>{{ intentosRestantes }}/5</span>
         </div>
 
         @if(nanograma){

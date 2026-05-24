@@ -97,7 +97,7 @@ export class Nanograma {
     const esCorrecto = this.esCeldaCorrecta(row, col);
     const eraCorrectoAntes = this.estadoAnteriorCorrecto(row, col, estadoAnterior);
   
-    if (eraCorrectoAntes && !esCorrecto && !this.celdaEnError()[row][col]) {
+    if (!esCorrecto || eraCorrectoAntes && !esCorrecto && !this.celdaEnError()[row][col]) {
       this.intentosRestantes--;
       const nuevaMatriz = this.celdaEnError().map((fila, i) =>
       i === row ? fila.map((valor, j) => j === col ? true : valor) : fila
@@ -192,12 +192,12 @@ export class Nanograma {
   
   mostrarFinPartida() {
     Swal.fire({
-      title: 'Partida terminada',
+      title: this.victoria() ? 'GANASTE :D' : 'PERDISTE :(',
       html: `
         <div style="font-size: 1.2rem; margin-bottom: 1rem;">
           Puntaje final: ${this.intentosRestantes}
         </div>
-        <img src="https://placehold.co/200x150.png" alt="Imagen final" style="max-width: 150px;">
+        <img src="assets/nanograma/${this.victoria() ? 'victoria' : 'derrota'}.png" alt="Imagen final" style="max-width: 150px;">
       `,
       showCancelButton: true,
       confirmButtonText: 'Reiniciar',
