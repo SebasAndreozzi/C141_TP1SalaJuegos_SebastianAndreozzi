@@ -1,4 +1,4 @@
-import { Component, OnInit, inject } from '@angular/core';
+import { Component, signal , inject } from '@angular/core';
 import { NanogramaModel, CeldaEstado } from '../../models/nanograma';
 import { NanogramaService } from '../../services/nanograma';
 import { CommonModule } from '@angular/common';
@@ -14,10 +14,12 @@ import Swal from 'sweetalert2';
   templateUrl: './nanograma.html',
   styleUrls: ['./nanograma.css']
 })
-export class Nanograma implements OnInit {
+export class Nanograma {
   private auth = inject(AuthService)
   private supaPuntaje = inject(PuntajeService);
   userNameFormat = new UserNamePipe();
+
+  juegoIniciado = signal<boolean>(false);
 
   nanograma: NanogramaModel | null = null;
   celdas: CeldaEstado[][] = [];
@@ -32,7 +34,8 @@ export class Nanograma implements OnInit {
     private nanogramaService: NanogramaService,
   ) {}
 
-  ngOnInit(): void {
+  iniciarJuego(): void {
+    this.juegoIniciado.set(true);
     this.iniciarNuevaPartida();
   }
 
