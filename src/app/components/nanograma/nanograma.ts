@@ -23,13 +23,11 @@ export class Nanograma {
   juegoIniciado = signal<boolean>(false);
 
   nanograma: NanogramaModel | null = null;
-  celdas: CeldaEstado[][] = [];
+  celdas = signal<CeldaEstado[][]>([]);
+  celdaEnError = signal<boolean[][]>([]);
   intentosRestantes = 5;
   gameOver = false;
   victoria = false;
-
-  // Almacenar si una celda ya causó un error (para no descontar múltiples veces)
-  private celdaEnError: boolean[][] = [];
 
   iniciarJuego(): void {
     this.juegoIniciado.set(true);
@@ -41,28 +39,29 @@ export class Nanograma {
     this.intentosRestantes = 5;
     this.gameOver = false;
     this.victoria = false;
-    this.celdas = [];
-    this.celdaEnError = [];
+    const nuevasCeldas: CeldaEstado[][] = [];
+    const nuevosErrores: boolean[][] = [];
 
     if (this.nanograma) {
       for (let i = 0; i < this.nanograma.rows; i++) {
-        this.celdas[i] = [];
-        this.celdaEnError[i] = [];
+        nuevasCeldas[i] = [];
+        nuevosErrores[i] = [];
         for (let j = 0; j < this.nanograma.cols; j++) {
-          this.celdas[i][j] = 'vacia';
-          this.celdaEnError[i][j] = false;
+          nuevasCeldas[i][j] = 'vacia';
+          nuevosErrores[i][j] = false;
         }
       }
     }
 
-    console.log(this.celdas)
+    this.celdas.set(nuevasCeldas);
+    this.celdaEnError.set(nuevosErrores);
   }
 
   onLeftClick(row: number, col: number, event: MouseEvent): void {
     event.preventDefault();
     if (this.gameOver) return;
 
-    const estadoAnterior = this.celdas[row][col];
+    const estadoAnterior = this.celdas()[row][col];
     let nuevoEstado: CeldaEstado;
     
     if (estadoAnterior === 'llena') {
@@ -78,7 +77,7 @@ export class Nanograma {
     event.preventDefault();
     if (this.gameOver) return;
 
-    const estadoAnterior = this.celdas[row][col];
+    const estadoAnterior = this.celdas()[row][col];
     let nuevoEstado: CeldaEstado;
     
     if (estadoAnterior === 'cruz') {
@@ -94,29 +93,40 @@ export class Nanograma {
     if (this.gameOver) return;
     if (nuevoEstado === estadoAnterior) return;
 
-    this.celdas[row][col] = nuevoEstado;
+    const nuevasCeldas = this.celdas().map(fila => [...fila]);
+    nuevasCeldas[row][col] = nuevoEstado;
+    this.celdas.set(nuevasCeldas);
 
     const esCorrecto = this.esCeldaCorrecta(row, col);
     const eraCorrectoAntes = this.estadoAnteriorCorrecto(row, col, estadoAnterior);
   
-    if (eraCorrectoAntes && !esCorrecto && !this.celdaEnError[row][col]) {
+    if (eraCorrectoAntes && !esCorrecto && !this.celdaEnError()[row][col]) {
       this.intentosRestantes--;
-      this.celdaEnError[row][col] = true;
+      const nuevaMatriz = this.celdaEnError().map((fila, i) =>
+      i === row ? fila.map((valor, j) => j === col ? true : valor) : fila
+    );
+    this.celdaEnError.set(nuevaMatriz);
+
       if (this.intentosRestantes <= 0) {
         this.gameOver = true;
         this.victoria = false;
         this.guardarPartida();
+        this.mostrarFinPartida();
       }
     }
 
     if (esCorrecto) {
-      this.celdaEnError[row][col] = false;
+      const nuevaMatriz = this.celdaEnError().map((fila, i) =>
+      i === row ? fila.map((valor, j) => j === col ? false : valor) : fila
+    );
+    this.celdaEnError.set(nuevaMatriz);
     }
 
     if (!this.gameOver && this.verificarVictoria()) {
       this.gameOver = true;
       this.victoria = true;
       this.guardarPartida();
+      this.mostrarFinPartida();
     }
   }
 
@@ -133,7 +143,7 @@ export class Nanograma {
   private esCeldaCorrecta(row: number, col: number): boolean {
     if (!this.nanograma) return false;
     const solucion = this.nanograma.solution[row][col];
-    const estado = this.celdas[row][col];
+    const estado = this.celdas()[row][col];
     if (solucion) {
       return estado === 'llena';
     } else {
@@ -175,15 +185,39 @@ export class Nanograma {
 
   async guardarPartida() {
   
-      const table: Tabla = 'nanogramaPuntaje'
-  
-      const payload: Puntaje = {
-        puntaje: this.intentosRestantes,
-        uid: this.auth.user()?.id,
-        user_name: this.userNameFormat.transform(this.auth.userEmail())
-      }
-  
-      await this.supaPuntaje.guardarPuntaje(table, payload);
-        
+    const table: Tabla = 'nanogramaPuntaje'
+
+    const payload: Puntaje = {
+      puntaje: this.intentosRestantes,
+      uid: this.auth.user()?.id,
+      user_name: this.userNameFormat.transform(this.auth.userEmail())
     }
+
+    await this.supaPuntaje.guardarPuntaje(table, payload);
+        
+  }
+  
+  mostrarFinPartida() {
+    Swal.fire({
+      title: 'Partida terminada',
+      html: `
+        <div style="font-size: 1.2rem; margin-bottom: 1rem;">
+          Puntaje final: ${this.intentosRestantes}
+        </div>
+        <img src="https://placehold.co/200x150.png" alt="Imagen final" style="max-width: 150px;">
+      `,
+      showCancelButton: true,
+      confirmButtonText: 'Reiniciar',
+      cancelButtonText: 'Volver al inicio',
+      reverseButtons: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#fc3130'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.iniciarJuego();
+      } else if (result.dismiss === Swal.DismissReason.cancel) {
+        this.juegoIniciado.set(false);
+      }
+    });
+  }
 }

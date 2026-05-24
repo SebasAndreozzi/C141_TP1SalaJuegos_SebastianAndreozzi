@@ -42,8 +42,8 @@
                 <div class="grid-row">
                     @for (j of colIndices; track j) {
                     <div class="cell"
-                        [class.fill]="celdas[i][j] === 'llena'"
-                        [class.cross]="celdas[i][j] === 'cruz'"
+                        [class.fill]="celdas()[i][j] === 'llena'"
+                        [class.cross]="celdas()[i][j] === 'cruz'"
                         (click)="onLeftClick(i, j, $event)"
                         (contextmenu)="onRightClick(i, j, $event)">
                     </div>
