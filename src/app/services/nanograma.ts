@@ -1,38 +1,23 @@
 import { Injectable } from '@angular/core';
 import { NanogramaModel } from '../models/nanograma';
+import { NANO } from '../data/nanograma';
 
 @Injectable({ providedIn: 'root' })
 export class NanogramaService {
-  private puzzleBase: NanogramaModel;
+  private nanogramaBase: NanogramaModel;
 
   constructor() {
-    // Puzzle de ejemplo 5x5 (una "F" simple)
-    const solution: boolean[][] = [
-      [false, false, false, false, true, false, true, true, true, false],
-      [false, false, false, false, false, true, true, true, false, false],
-      [false, false, true, true, true, true, false, false, false, false],
-      [false, true, false, false, true, true, false, false, false, false],
-      [false, true, false, false, true, true, false, false, false, false],
-      [false, true, true, true, true, true, true, false, false, false],
-      [false, true, true, true, true, true, true, true, true, false],
-      [false, true, true, true, true, true, true, true, true, false],
-      [false, false, true, true, true, true, true, true, false, false],
-      [false, false, false, true, true, true, true, false, false, false]
-    ];
 
-    const rows = 10, cols = 10;
+    const rowClues = this.calcularClaves(NANO.solution, NANO.rows, NANO.cols, 'row');
+  
+    const colClues = this.calcularClaves(NANO.solution, NANO.rows, NANO.cols, 'col');
 
-    // Calcular pistas de fila
-    const rowClues = this.calcularClaves(solution, rows, cols, 'row');
-    // Calcular pistas de columna
-    const colClues = this.calcularClaves(solution, rows, cols, 'col');
-
-    this.puzzleBase = {
-      rows,
-      cols,
+    this.nanogramaBase = {
+      rows: NANO.rows,
+      cols: NANO.cols,
       rowClues,
       colClues,
-      solution
+      solution: NANO.solution
     };
   }
 
@@ -62,7 +47,7 @@ export class NanogramaService {
   }
 
   getNanograma(): NanogramaModel {
-    // Retorna una copia para no modificar el original
-    return JSON.parse(JSON.stringify(this.puzzleBase));
+    
+    return this.nanogramaBase;
   }
 }

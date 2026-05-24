@@ -17,6 +17,7 @@ import Swal from 'sweetalert2';
 export class Nanograma {
   private auth = inject(AuthService)
   private supaPuntaje = inject(PuntajeService);
+  private nanogramaService= inject(NanogramaService);
   userNameFormat = new UserNamePipe();
 
   juegoIniciado = signal<boolean>(false);
@@ -29,10 +30,6 @@ export class Nanograma {
 
   // Almacenar si una celda ya causó un error (para no descontar múltiples veces)
   private celdaEnError: boolean[][] = [];
-
-  constructor(
-    private nanogramaService: NanogramaService,
-  ) {}
 
   iniciarJuego(): void {
     this.juegoIniciado.set(true);
@@ -161,11 +158,11 @@ export class Nanograma {
   }
 
   obtenerClaveFila(index: number): number[] {
-    return this.nanograma?.rowClues[index] || [];
+    return this.nanograma?.rowClues?.[index] || [];
   }
 
   obtenerClaveColumna(index: number): number[] {
-    return this.nanograma?.colClues[index] || [];
+    return this.nanograma?.colClues?.[index] || [];
   }
 
   get rowIndices(): number[] {
