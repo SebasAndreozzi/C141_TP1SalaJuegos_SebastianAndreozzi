@@ -1,0 +1,121 @@
+<main>
+    <h2>Tabla de puntajes</h2>
+
+    <div class="table-container">
+
+        <div class="game-table">
+
+            <h3>Ahorcado</h3>
+            <div class="border-table border-ahorcado">
+                <div class="scroll">
+                    <table>
+                        <tbody>
+
+                            <tr>
+                                <th>Usuario</th>
+                                <th>Puntaje</th>
+                                <th>Fecha</th>
+                            </tr>
+
+                            @for (partida of puntajeAhorcado(); track partida.id) {
+
+                                <tr>
+                                    <td [appMensajePropio]="partida.user_name" [usuarioActivo]="activeUser()">{{ partida.user_name }}</td>
+                                    <td>{{ partida.puntaje }}</td>
+                                    <td>{{ partida.created_at? (partida.created_at | date) : '' }}</td>
+                                </tr>
+                            }
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <div class="game-table">
+            <h3>Mayor o Menor</h3>
+
+            <div class="border-table border-mayormenor">
+                <div class="scroll">
+                    <table>
+                        <tbody>
+
+                            <tr>
+                                <th>Usuario</th>
+                                <th>Puntaje</th>
+                                <th>Fecha</th>
+                            </tr>
+
+                            @for (partida of puntajeMayorMenor(); track partida.id) {
+
+                                <tr>
+                                    <td [appMensajePropio]="partida.user_name" [usuarioActivo]="activeUser()">{{ partida.user_name }}</td>
+                                    <td>{{ partida.puntaje }}</td>
+                                    <td>{{ partida.created_at? (partida.created_at | date) : '' }}</td>
+                                </tr>
+                            }
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        
+        <div class="game-table">
+            <h3>Preguntados</h3>
+            <div class="border-table border-preguntados">
+                <div class="scroll">
+                    <table>
+                        <tbody>
+
+                            <tr>
+                                <th>Usuario</th>
+                                <th>Puntaje</th>
+                                <th>Fecha</th>
+                            </tr>
+
+                            @for (partida of puntajePreguntados(); track partida.id) {
+
+                                <tr>
+                                    <td [appMensajePropio]="partida.user_name" [usuarioActivo]="activeUser()">{{ partida.user_name }}</td>
+                                    <td>{{ partida.puntaje }}</td>
+                                    <td>{{ partida.created_at? (partida.created_at | date) : '' }}</td>
+                                </tr>
+                            }
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <div class="game-table">
+            <h3>Nanograma</h3>
+
+            <div class="border-table border-nanograma">
+                <div class="scroll">
+                    <table>
+                        <tbody>
+
+                            <tr>
+                                <th>Usuario</th>
+                                <th>Puntaje</th>
+                                <th>Fecha</th>
+                            </tr>
+
+                            @for (partida of puntajeNanograma(); track partida.id) {
+
+                                <tr>
+                                    <td [appMensajePropio]="partida.user_name" [usuarioActivo]="activeUser()">{{ partida.user_name }}</td>
+                                    <td>{{ partida.puntaje }}</td>
+                                    <td>{{ partida.created_at? (partida.created_at | date) : '' }}</td>
+                                </tr>
+                            }
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
