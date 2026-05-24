@@ -21,24 +21,21 @@ export class Nanograma {
   userNameFormat = new UserNamePipe();
 
   juegoIniciado = signal<boolean>(false);
+  juegoFinalizado = signal<boolean>(false);
 
   nanograma: NanogramaModel | null = null;
   celdas = signal<CeldaEstado[][]>([]);
   celdaEnError = signal<boolean[][]>([]);
   intentosRestantes = 5;
-  gameOver = false;
-  victoria = false;
+  
+  victoria = signal<boolean>(false);
 
   iniciarJuego(): void {
     this.juegoIniciado.set(true);
-    this.iniciarNuevaPartida();
-  }
-
-  iniciarNuevaPartida(): void {
     this.nanograma = this.nanogramaService.getNanograma();
     this.intentosRestantes = 5;
-    this.gameOver = false;
-    this.victoria = false;
+    this.juegoFinalizado.set(false);
+    this.victoria.set(false);
     const nuevasCeldas: CeldaEstado[][] = [];
     const nuevosErrores: boolean[][] = [];
 
@@ -59,7 +56,7 @@ export class Nanograma {
 
   onLeftClick(row: number, col: number, event: MouseEvent): void {
     event.preventDefault();
-    if (this.gameOver) return;
+    if (this.juegoFinalizado()) return;
 
     const estadoAnterior = this.celdas()[row][col];
     let nuevoEstado: CeldaEstado;
@@ -75,7 +72,7 @@ export class Nanograma {
 
   onRightClick(row: number, col: number, event: MouseEvent): void {
     event.preventDefault();
-    if (this.gameOver) return;
+    if (this.juegoFinalizado()) return;
 
     const estadoAnterior = this.celdas()[row][col];
     let nuevoEstado: CeldaEstado;
@@ -90,7 +87,7 @@ export class Nanograma {
   }
 
   private aplicarCambio(row: number, col: number, nuevoEstado: CeldaEstado, estadoAnterior: CeldaEstado): void {
-    if (this.gameOver) return;
+    if (this.juegoFinalizado()) return;
     if (nuevoEstado === estadoAnterior) return;
 
     const nuevasCeldas = this.celdas().map(fila => [...fila]);
@@ -108,8 +105,8 @@ export class Nanograma {
     this.celdaEnError.set(nuevaMatriz);
 
       if (this.intentosRestantes <= 0) {
-        this.gameOver = true;
-        this.victoria = false;
+        this.juegoFinalizado.set(true);
+        this.victoria.set(false);
         this.guardarPartida();
         this.mostrarFinPartida();
       }
@@ -122,9 +119,9 @@ export class Nanograma {
     this.celdaEnError.set(nuevaMatriz);
     }
 
-    if (!this.gameOver && this.verificarVictoria()) {
-      this.gameOver = true;
-      this.victoria = true;
+    if (!this.juegoFinalizado() && this.verificarVictoria()) {
+      this.juegoFinalizado.set(true);
+      this.victoria.set(true);
       this.guardarPartida();
       this.mostrarFinPartida();
     }
@@ -161,10 +158,6 @@ export class Nanograma {
       }
     }
     return true;
-  }
-
-  reiniciarPartida(): void {
-    this.iniciarNuevaPartida();
   }
 
   obtenerClaveFila(index: number): number[] {

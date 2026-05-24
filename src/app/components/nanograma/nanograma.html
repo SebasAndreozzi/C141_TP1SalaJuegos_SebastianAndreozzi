@@ -12,7 +12,12 @@
         </div>
     }@else {
     <div class="game-container">
-        
+
+        <div class="intentos">
+            <img src="assets/nanograma/heart.png" alt="heart">
+            <p>{{ intentosRestantes }}/5</p>
+        </div>
+
         @if(nanograma){
         <div class="nanogram-board">
             <div class="col-clues">
