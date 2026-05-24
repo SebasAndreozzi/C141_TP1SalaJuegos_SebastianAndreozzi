@@ -1,0 +1,154 @@
+.game-container {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+  background: #f5f5f5;
+  border-radius: 16px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+h2 {
+  text-align: center;
+  color: #2c3e50;
+  margin-bottom: 20px;
+}
+
+.player-info {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  justify-content: center;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+}
+
+.player-info label {
+  font-weight: bold;
+}
+
+.player-info input {
+  padding: 6px 12px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 14px;
+}
+
+.attempts {
+  font-size: 1.2rem;
+  background: #fff0f0;
+  padding: 4px 12px;
+  border-radius: 20px;
+  color: #c0392b;
+  font-weight: bold;
+}
+
+.game-message {
+  text-align: center;
+  margin: 15px 0;
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.win { color: #27ae60; }
+.lose { color: #e74c3c; }
+
+.nanogram-board {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.col-clues {
+  display: flex;
+}
+
+.corner {
+  width: 73px;
+  height: 50px;
+  background: #ddd;
+  border: 1px solid #aaa;
+  border-bottom: none;
+  border-right: none;
+}
+
+.clue-col {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+  width: 29px;
+  margin: 0 1px;
+  background: #ecf0f1;
+  border: 1px solid #bdc3c7;
+  border-bottom: none;
+  min-height: 50px;
+  padding: 5px 0;
+}
+
+.clue-number {
+  font-size: 12px;
+  font-weight: bold;
+  margin: 1px 0;
+  text-align: center;
+}
+
+.board-body {
+  display: flex;
+}
+
+.row-clues {
+  display: flex;
+  flex-direction: column;
+  width: 75px;
+  background: #ecf0f1;
+  border-right: 1px solid #bdc3c7;
+}
+
+.clue-row {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 3px;
+  height: 30px;
+  padding: 0 5px;
+  border-bottom: 1px solid #bdc3c7;
+  background: #ecf0f1;
+}
+
+.grid {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid #7f8c8d;
+}
+
+.grid-row {
+  display: flex;
+}
+
+.cell {
+  width: 30px;
+  height: 30px;
+  border: 1px solid #bdc3c7;
+  background-color: white;
+  cursor: pointer;
+  transition: 0.05s linear;
+  box-sizing: border-box;
+}
+
+.cell.fill {
+  background-color: #2c3e50;
+}
+
+.cell.cross {
+  background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="red" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="4" y1="4" x2="20" y2="20"></line><line x1="20" y1="4" x2="4" y2="20"></line></svg>');
+  background-size: 20px;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-color: white;
+}
+
+.cell:hover {
+  background-color: #f0f0f0;
+  transform: scale(0.98);
+}
