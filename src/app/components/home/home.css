@@ -8,8 +8,6 @@ main{
     display: flex;
     justify-content: flex-end;
     align-items: center;
-    
-
 }
 
 .user-box img{
@@ -99,9 +97,31 @@ h2{
     }
 }
 
-@media (max-width: 750px){
-    .juego img{
-        width: 250px;
+@media (max-width: 830px){
+    .user-box{
+        position: absolute;
+        top: 5px;
+        right: 10px;
+
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        gap: 5px;
+
+        color: #fff;
+        font-size: 12px;
+    }
+
+    .user-box button{
+        color: #fff;
+        background-color: #314ed0;
+        transition: 300ms;
+    }
+
+    .user-box button:hover{
+        color: #314ed0;
+        background: #fff;
     }
 }
 
