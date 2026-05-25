@@ -1,4 +1,4 @@
-import { Component, inject, signal } from '@angular/core';
+import { Component, inject, signal, computed } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { PuntajeService } from '../../services/puntaje';
 import { Puntaje } from '../../models/puntaje';
@@ -20,22 +20,15 @@ export class TablaPuntaje {
 
   activeUser = signal<string>('');
 
-  puntajeAhorcado = signal<Puntaje[]>([]);
-  puntajeMayorMenor = signal<Puntaje[]>([]);
-  puntajePreguntados = signal<Puntaje[]>([]);
-  puntajeNanograma = signal<Puntaje[]>([]);
+  puntajeAhorcado = computed(() => this.puntajeService.puntajeAhorcado());
+  puntajeMayorMenor = computed(() => this.puntajeService.puntajeMayorMenor());
+  puntajePreguntados = computed(() => this.puntajeService.puntajePreguntados());
+  puntajeNanograma = computed(() => this.puntajeService.puntajeNanograma());
 
   async ngOnInit(){
     await this.auth.checkSession();
     this.activeUser.set(await this.userNameFormat.transform(this.auth.userEmail()))
-    
-    await this.cargarPuntajes();
-  }
 
-  async cargarPuntajes(){
-    this.puntajeAhorcado.set(await this.puntajeService.obtenerPuntajes('ahorcadoPuntaje'));
-    this.puntajeMayorMenor.set(await this.puntajeService.obtenerPuntajes('mayormenorPuntaje'));
-    this.puntajePreguntados.set(await this.puntajeService.obtenerPuntajes('preguntadosPuntaje'));
-    this.puntajeNanograma.set(await this.puntajeService.obtenerPuntajes('nanogramaPuntaje'));
+    await this.puntajeService.cargarPuntajes();
   }
 }
