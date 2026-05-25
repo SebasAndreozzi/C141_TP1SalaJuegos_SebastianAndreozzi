@@ -2,6 +2,7 @@
 
     @if (auth.isAuthenticated()) {
         <div class="user-box">
+            <img src="assets/userIcon.png" alt="icon">
             <span >{{auth.userEmail() | userName}}</span>
             <button (click)="auth.logout()">Cerrar Sesion</button>
         </div>

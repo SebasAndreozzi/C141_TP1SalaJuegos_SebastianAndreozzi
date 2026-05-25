@@ -8,12 +8,21 @@ main{
     display: flex;
     justify-content: flex-end;
     align-items: center;
-    gap: 10px;
+    
 
 }
 
+.user-box img{
+    height: 25px;
+}
+
+.user-box span{
+    font-weight: 500;
+    border-bottom: 2px dashed #fc3130;
+}
+
 .user-box button{
-    margin-right: 12px;
+    margin: 0 12px;
     padding: 5px 10px;
     border: 0;
     border-radius: 5px;
