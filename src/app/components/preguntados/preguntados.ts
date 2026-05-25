@@ -21,38 +21,36 @@ export class Preguntados {
   userNameFormat = new UserNamePipe();
 
   juegoIniciado = signal<boolean>(false);
-  loading = signal<boolean>(false);
-
-  preguntas: Pregunta[] = [];
-
-  preguntaActual = signal<Pregunta>({} as Pregunta);
-
-  opciones: string[] = [];
-
-  indicePregunta = signal<number>(0);
-
-  puntaje = signal<number>(0);
-
   juegoTerminado = signal<boolean>(false);
 
-  async iniciarJuego() {
+  loading = signal<boolean>(false);
+  error = signal<string>('');
+
+  preguntas: Pregunta[] = [];
+  preguntaActual = signal<Pregunta>({} as Pregunta);
+  opciones: string[] = [];
+  indicePregunta = signal<number>(0);
+  puntaje = signal<number>(0);
+
+  async iniciarJuego(): Promise<void> {
 
     this.indicePregunta.set(0);
-
     this.puntaje.set(0);
-
     this.juegoTerminado.set(false);
-
     this.loading.set(true);
+    this.error.set('');
 
     await this.preguntadosService.loadPreguntas().then(() => {
-      console.log(this.preguntadosService.preguntas);
 
       this.preguntas = this.preguntadosService.preguntas;
 
       if (this.preguntas.length > 0) {
-
         this.cargarPregunta();
+
+      }else{
+        this.error.set('Error al cargar la pregunta');
+        this.mostrarError(this.error());
+        return;
       }
 
       this.juegoIniciado.set(true);
@@ -69,12 +67,14 @@ export class Preguntados {
     const pregunta = this.preguntaActual();
 
     if (!pregunta) {
+      this.error.set('Error al cargar la pregunta');
+      this.mostrarError(this.error());
       return;}
 
     this.opciones = [
       this.limpiarTexto(pregunta.respuesta_correcta),
       this.limpiarTexto(pregunta.respuestas_incorrectas[0]),
-      ...pregunta.respuestas_incorrectas.slice(1).map((o) => this.limpiarTexto(o))
+      ...pregunta.respuestas_incorrectas.slice(1).map((opcion) => this.limpiarTexto(opcion))
     ];
 
     this.mezclarOpciones();
@@ -96,7 +96,6 @@ export class Preguntados {
     this.indicePregunta.update((val) => val + 1);
 
     if (this.indicePregunta() >= this.preguntas.length) {
-
       this.finalizarJuego();
 
       return;
@@ -160,6 +159,16 @@ export class Preguntados {
 
     return txt.value;
 
+  }
+
+  mostrarError(error: string) {
+    Swal.fire({
+      title: error,
+      confirmButtonText: 'Volver al inicio',
+      confirmButtonColor: '#fc3130',
+    }).then(() => {
+      this.juegoIniciado.set(false);
+    });
   }
 
 }
