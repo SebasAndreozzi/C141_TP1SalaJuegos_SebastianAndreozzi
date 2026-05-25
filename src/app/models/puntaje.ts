@@ -6,4 +6,8 @@ export interface Puntaje {
   user_name: string;
 }
 
+export interface PuntajeAhorcado extends Puntaje {
+  tiempo_s: number;
+  letras_seleccionadas: number;
+}
 export type Tabla = 'ahorcadoPuntaje' | 'mayormenorPuntaje' | 'preguntadosPuntaje' | 'nanogramaPuntaje';
