@@ -33,7 +33,7 @@ export class Preguntados {
 
   puntaje = signal<number>(0);
 
-  juegoTerminado = false;
+  juegoTerminado = signal<boolean>(false);
 
   async iniciarJuego() {
 
@@ -41,7 +41,7 @@ export class Preguntados {
 
     this.puntaje.set(0);
 
-    this.juegoTerminado = false;
+    this.juegoTerminado.set(false);
 
     this.loading.set(true);
 
@@ -108,7 +108,7 @@ export class Preguntados {
 
   async finalizarJuego() {
 
-    this.juegoTerminado = true;
+    this.juegoTerminado.set(true);
     await this.guardarPartida();
     this.mostrarFinPartida();
 
@@ -135,7 +135,7 @@ export class Preguntados {
           <div style="font-size: 1.2rem; margin-bottom: 1rem;">
             Puntaje final: ${this.puntaje()}
           </div>
-          <img src="https://placehold.co/200x150.png" alt="Imagen final" style="max-width: 150px;">
+          <img src="/assets/preguntados/fin.png" alt="Imagen final" style="max-width: 150px;">
         `,
         showCancelButton: true,
         confirmButtonText: 'Reiniciar',
