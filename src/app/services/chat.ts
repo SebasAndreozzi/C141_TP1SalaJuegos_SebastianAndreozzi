@@ -7,7 +7,7 @@ import { Message } from '../models/message';
 export class ChatService {
   private supabase = inject(SupabaseService)
   private platformId = inject(PLATFORM_ID);
-  // Usamos un Signal para que el HTML se actualice automáticamente
+  
   public mensajes = signal<Message[]>([]);
 
   constructor() {

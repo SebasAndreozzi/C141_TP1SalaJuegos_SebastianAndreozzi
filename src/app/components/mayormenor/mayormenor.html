@@ -19,7 +19,7 @@
                 <div class="carta-actual" [class.slide-in]="animando()">
                     <img src="{{cartaActual.imagen}}" class="carta" alt="{{cartaActual.valor}}{{cartaActual.palo}}">
                 </div>
-                <img src="assets/cartas/back.png" class="carta carta-mazo" alt="back-card">
+                <img src="assets/cartas/back.png" class="carta carta-mazo" alt="back-card" [hidden]="juegoFinalizado()">
             </div>
 
             <div class="juego-button-container">

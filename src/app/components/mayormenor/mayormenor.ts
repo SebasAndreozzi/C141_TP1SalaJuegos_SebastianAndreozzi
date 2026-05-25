@@ -48,21 +48,10 @@ export class MayorMenor {
 
     const siguiente = this.mazo[this.indice + 1];
 
-    if (!siguiente) {
-
-      this.juegoFinalizado.set(true);
-      await this.guardarPartida();
-      this.mostrarFinPartida();
-
-
-      return;
-    }
-
     const acierto = (eleccion === 'mayor' && siguiente.valor > this.cartaActual.valor) || (eleccion === 'menor'&& siguiente.valor < this.cartaActual.valor);
 
     if (acierto) {
       this.puntaje++;
-
     }
 
     this.indice++;
@@ -72,6 +61,20 @@ export class MayorMenor {
     setTimeout(() => {
       this.animando.set(false);
     }, 300);
+
+    await this.checkFinal(this.indice >= this.mazo.length - 1);
+
+  }
+
+  async checkFinal(termino: boolean){
+    if (termino) {
+
+      this.juegoFinalizado.set(true);
+      await this.guardarPartida();
+      this.mostrarFinPartida();
+
+    }
+    
   }
 
   async guardarPartida() {
