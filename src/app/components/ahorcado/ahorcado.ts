@@ -1,7 +1,7 @@
 import { Component, signal, inject } from '@angular/core';
 import { PALABRAS, ABC } from '../../data/palabras';
 import { PuntajeService } from '../../services/puntaje';
-import { Puntaje, Tabla } from '../../models/puntaje';
+import { Puntaje, PuntajeAhorcado, Tabla } from '../../models/puntaje';
 import { AuthService } from '../../services/auth';
 import { UserNamePipe } from '../../pipes/userName';
 import Swal from 'sweetalert2';
@@ -112,10 +112,12 @@ export class Ahorcado {
 
     const table: Tabla = 'ahorcadoPuntaje'
 
-    const payload: Puntaje = {
+    const payload: PuntajeAhorcado = {
       puntaje: this.puntaje,
       uid: this.auth.user()?.id,
-      user_name: this.userNameFormat.transform(this.auth.userEmail())
+      user_name: this.userNameFormat.transform(this.auth.userEmail()),
+      tiempo_s: tiempoFinal,
+      letras_seleccionadas: this.letrasElegidas.length
     }
 
     await this.supaPuntaje.guardarPuntaje(table, payload);
