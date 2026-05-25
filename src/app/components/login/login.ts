@@ -3,6 +3,7 @@ import { FormsModule } from '@angular/forms';
 import { CommonModule } from "@angular/common";
 import { Router } from '@angular/router';
 import { AuthService } from '../../services/auth';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-login',
@@ -28,10 +29,12 @@ export class Login {
     if (success) {
       this.loading.set(false)
       this.router.navigate(['/'])
+    }else{
+      this.loading.set(false)
+      this.error.set('Credenciales incorrectas.')
+      this.mostrarError(this.error())
     }
-
-    this.loading.set(false)
-    this.error.set('Credenciales incorrectas.')
+    
   }
 
   async fastLogin1() {
@@ -47,5 +50,13 @@ export class Login {
   async fastLogin3() {
     this.email = 'test@salajuegos.com';
     this.password = 'asdfgh';
+  }
+
+  mostrarError(error: string) {
+    Swal.fire({
+      title: error,
+      icon: 'error',
+      confirmButtonColor: '#fc3130',
+    })
   }
 }

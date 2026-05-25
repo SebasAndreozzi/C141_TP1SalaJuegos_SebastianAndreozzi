@@ -4,9 +4,6 @@
 
     <form (ngSubmit)="onSubmit()" class="auth-form" >
 
-        @if(error()){
-            <div class="form-alert"><span>{{ error() }}</span></div>
-        }
 
         <div class="auth-form-box">
             <label for="email">Email</label>

@@ -4,6 +4,7 @@ import { CommonModule } from "@angular/common";
 import { Router } from '@angular/router';
 import { AuthService } from '../../services/auth';
 import { User } from '../../models/user';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-signup',
@@ -23,7 +24,6 @@ export class Signup {
 
   loading = signal(false);
   error = signal('');
-  message = signal('');
 
   async onSubmit() {
     this.loading.set(true);
@@ -41,13 +41,40 @@ export class Signup {
       await this.auth.register(newUser, this.password);
       
       this.loading.set(false);
-      this.message.set('Registro exitoso!');
-      setTimeout(() => {
-        this.router.navigate(['/']);
-      }, 2000);
+      this.registroExitoso('Registro exitoso!');
+
     } catch (err){
       this.loading.set(false);
       this.error.set((err as Error).message)
+      this.mostrarError(this.error());
+
     }
+  }
+
+  mostrarError(error: string) {
+    Swal.fire({
+      title: error,
+      icon: 'error',
+      confirmButtonColor: '#fc3130',
+    })
+  }
+
+  registroExitoso(mensaje: string) {
+    Swal.fire({
+      title: mensaje,
+      html: `<div style="font-size: 1.2rem; margin-bottom: 1rem;">
+                Redirigiendo al inicio...
+              </div>`,
+      icon: 'success',
+      showConfirmButton: false,
+      showCloseButton: false,
+      allowOutsideClick: false,
+      allowEscapeKey: false,
+      timer: 2000,
+      timerProgressBar: true,
+      willClose: () => {
+        this.router.navigate(['/']);
+      }
+    })
   }
 }

@@ -4,13 +4,6 @@
 
     <form (ngSubmit)="onSubmit()" class="auth-form">
 
-        @if(error()){
-            <div class="form-alert"><span>{{ error() }}</span></div>
-        }
-        @if(message()){
-            <div class="form-alert"><span>{{ message() }}</span></div>
-        }
-
         <div class="signup-form-input">
             <div class="user-info">
                 <div class="auth-form-box">
