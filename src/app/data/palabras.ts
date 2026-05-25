@@ -1,5 +1,8 @@
 export const PALABRAS: string[] = [
-    'ARBOL',
+    'TRONCO',
+    'RAMA',
+    'FLOR',
+    'SOMBRA',
     'SOL',
     'MANZANA',
     'HOJA'

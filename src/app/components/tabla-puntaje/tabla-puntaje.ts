@@ -1,0 +1,33 @@
+import { Component, inject, signal, computed } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { PuntajeService } from '../../services/puntaje';
+import { DatePipe } from '../../pipes/date';
+import { MensajePropioDirective } from '../../directives/userActivo';
+import { AuthService } from '../../services/auth';
+import { UserNamePipe } from '../../pipes/userName';
+
+@Component({
+  selector: 'app-tabla-puntaje',
+  imports: [CommonModule, DatePipe, MensajePropioDirective],
+  templateUrl: './tabla-puntaje.html',
+  styleUrl: './tabla-puntaje.css',
+})
+export class TablaPuntaje {
+  private puntajeService = inject(PuntajeService)
+  auth = inject(AuthService);
+  userNameFormat = new UserNamePipe();
+
+  activeUser = signal<string>('');
+
+  puntajeAhorcado = computed(() => this.puntajeService.puntajeAhorcado());
+  puntajeMayorMenor = computed(() => this.puntajeService.puntajeMayorMenor());
+  puntajePreguntados = computed(() => this.puntajeService.puntajePreguntados());
+  puntajeNanograma = computed(() => this.puntajeService.puntajeNanograma());
+
+  async ngOnInit(){
+    await this.auth.checkSession();
+    this.activeUser.set(await this.userNameFormat.transform(this.auth.userEmail()))
+
+    await this.puntajeService.cargarPuntajes();
+  }
+}

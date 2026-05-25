@@ -11,6 +11,7 @@ import { Preguntados } from './components/preguntados/preguntados';
 import { Nanograma } from './components/nanograma/nanograma';
 import { guestGuard } from './guards/guest';
 import { SalaChat } from './components/sala-chat/sala-chat';
+import { TablaPuntaje } from './components/tabla-puntaje/tabla-puntaje';
 
 export const routes: Routes = [
     { path:'login', component: Login, canActivate: [guestGuard] },
@@ -34,6 +35,8 @@ export const routes: Routes = [
     ] },
 
     { path:'chat', canActivate: [authGuard], component: SalaChat },
+
+    { path:'score', canActivate: [authGuard], component: TablaPuntaje },
 
     {path:'', redirectTo:'home', pathMatch:'full'},
 

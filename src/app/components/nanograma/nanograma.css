@@ -1,0 +1,190 @@
+main{
+    margin: 0 auto;
+    font-family: "Montserrat", sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 20px;
+}
+
+h2{
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: 700;
+    font-size: 35px;
+}
+
+.pantalla-inicio{
+    margin-top: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 40px
+}
+
+.pantalla-inicio img{
+    min-width: 350px;
+}
+
+.pantalla-inicio .juego-button{
+    width: 150px;
+}
+
+.juego-button-container{
+  margin-top: 30px;
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+}
+
+.juego-button{
+    height: 50px;
+    padding: 0 20px;
+    background-color: transparent;
+    border: 2px solid #fc3130;
+    border-radius: 15px;
+    cursor: pointer;
+    font-weight: 500;
+    text-align: center;
+    transition: 200ms;
+}
+
+.juego-button:hover {
+    color: #fff;
+    background-color: #fc3130;
+}
+
+.juego-button:disabled:hover{
+  cursor: default;
+  background-color: transparent;
+  color: #c5b7b7;
+}
+
+
+.game-container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.intentos{
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 10px;
+  margin-left: 10px;
+}
+
+.intentos img{
+  width: 20px;
+  height: 20px;
+}
+
+.nanogram-board {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.col-clues {
+  display: flex;
+}
+
+.corner {
+  width: 73px;
+  height: 50px;
+  background: #ddd;
+  border: 1px solid #aaa;
+  border-bottom: none;
+  border-right: none;
+  margin-right: 1px;
+  margin-bottom: 2px;
+}
+
+.clue-col {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+  width: 28.5px;
+  margin: 0 1px;
+  background: #ecf0f1;
+  border: 1px solid #bdc3c7;
+  border-bottom: none;
+  min-height: 50px;
+  padding: 5px 0;
+}
+
+.clue-number {
+  font-size: 12px;
+  font-weight: bold;
+  margin: 1px 0;
+  text-align: center;
+}
+
+.board-body {
+  display: flex;
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.row-clues {
+  display: flex;
+  flex-direction: column;
+  width: 75px;
+  background: #ecf0f1;
+  border-right: 1px solid #bdc3c7;
+}
+
+.clue-row {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 3px;
+  height: 30px;
+  padding: 0 5px;
+  border-bottom: 1px solid #bdc3c7;
+  background: #ecf0f1;
+}
+
+.grid {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid #7f8c8d;
+}
+
+.grid-row {
+  display: flex;
+}
+
+.cell {
+  width: 30px;
+  height: 30px;
+  border: 1px solid #bdc3c7;
+  background-color: white;
+  cursor: pointer;
+  transition: 0.05s linear;
+  box-sizing: border-box;
+}
+
+.cell.fill {
+  background-color: #000;
+}
+
+.cell.cross {
+  background-image: url("/assets/nanograma/cross.png");
+  background-size: 20px;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-color: white;
+}
+
+.cell:hover {
+  background-color: #f0f0f0;
+  transform: scale(0.98);
+}

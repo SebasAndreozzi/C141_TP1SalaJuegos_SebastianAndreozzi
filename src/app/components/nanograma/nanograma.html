@@ -1,1 +1,65 @@
-<p>nanograma works!</p>
+<main>
+    <h2>Nanograma</h2>
+    @if(!juegoIniciado()){
+        <div class="pantalla-inicio">
+
+            <img src="assets/nanograma/inicio.png" alt="inicio">
+
+            <button (click)="iniciarJuego()" class="juego-button">
+                Iniciar Juego
+            </button>
+
+        </div>
+    }@else {
+    <div class="game-container">
+
+        <div class="intentos">
+            <img src="assets/nanograma/heart.png" alt="heart">
+            <span>{{ intentosRestantes }}/5</span>
+        </div>
+
+        @if(nanograma){
+        <div class="nanogram-board">
+            <div class="col-clues">
+                <div class="corner"></div>
+                @for (j of colIndices; track j) {
+                    <div class="clue-col">
+                    @for (clue of obtenerClaveColumna(j); track clue) {
+                        <div class="clue-number">{{ clue }}</div>
+                    }
+                    </div>
+                }
+            </div>
+
+            <div class="board-body">
+                <div class="row-clues">
+                    @for (i of rowIndices; track i) {
+                    <div class="clue-row">
+                        @for (clue of obtenerClaveFila(i); track clue) {
+                        <span class="clue-number">{{ clue }}</span>
+                        }
+                    </div>
+            }
+            </div>
+
+            <div class="grid">
+                @for (i of rowIndices; track i) {
+                <div class="grid-row">
+                    @for (j of colIndices; track j) {
+                    <div class="cell"
+                        [class.fill]="celdas()[i][j] === 'llena'"
+                        [class.cross]="celdas()[i][j] === 'cruz'"
+                        (click)="onLeftClick(i, j, $event)"
+                        (contextmenu)="onRightClick(i, j, $event)">
+                    </div>
+                    }
+                </div>
+                }
+            </div>
+            </div>
+        </div>
+        }
+    
+    </div>
+    }
+</main>
