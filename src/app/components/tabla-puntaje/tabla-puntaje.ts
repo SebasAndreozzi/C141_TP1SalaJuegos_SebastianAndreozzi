@@ -1,7 +1,6 @@
 import { Component, inject, signal, computed } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { PuntajeService } from '../../services/puntaje';
-import { Puntaje } from '../../models/puntaje';
 import { DatePipe } from '../../pipes/date';
 import { MensajePropioDirective } from '../../directives/userActivo';
 import { AuthService } from '../../services/auth';
