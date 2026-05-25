@@ -78,7 +78,7 @@ export class AuthService {
 
         if (insertError) {
             console.log('Insert error:', insertError);
-            throw new Error('Error al registrart usuario')
+            throw new Error('Error al registrar usuario')
         }
 
         this.user.set({ id: uid, email: newUser.email ?? '' });

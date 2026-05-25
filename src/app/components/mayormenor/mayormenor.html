@@ -1,1 +1,36 @@
-<p>mayormenor works!</p>
+    <main>
+    <h2>Mayor o menor</h2>
+    @if(!juegoIniciado()){
+        <div class="pantalla-inicio">
+
+            <img src="assets/cartas/inicio.png" alt="inicio">
+
+            <button (click)="iniciarJuego()" class="juego-button">
+                Iniciar Juego
+            </button>
+
+        </div>
+    }@else {
+        <div class="juego-container">
+
+            <h3>Puntaje: {{ puntaje }}</h3>
+
+            <div class="cartas-container">
+                <div class="carta-actual" [class.slide-in]="animando()">
+                    <img src="{{cartaActual.imagen}}" class="carta" alt="{{cartaActual.valor}}{{cartaActual.palo}}">
+                </div>
+                <img src="assets/cartas/back.png" class="carta carta-mazo" alt="back-card" [hidden]="juegoFinalizado()">
+            </div>
+
+            <div class="juego-button-container">
+
+                <button (click)="adivinar('mayor')" [disabled]="juegoFinalizado()" class="juego-button">Mayor</button>
+
+                <button (click)="adivinar('menor')" [disabled]="juegoFinalizado()" class="juego-button">Menor</button>
+
+            </div>
+
+        </div>
+    }
+
+</main>

@@ -1,0 +1,123 @@
+main{
+    margin: 0 auto;
+    font-family: "Montserrat", sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 20px;
+}
+
+h2{
+    margin-top: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: 700;
+    font-size: 35px;
+}
+
+h3{
+    margin: 0;
+}
+
+
+.pantalla-inicio{
+    margin-top: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 20px
+}
+
+.pantalla-inicio img{
+    min-width: 350px;
+}
+
+.pantalla-inicio .juego-button{
+    width: 150px;
+}
+
+.juego-button-container{
+  margin-top: 30px;
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+}
+
+.juego-button{
+    height: 50px;
+    padding: 0 20px;
+    background-color: transparent;
+    border: 2px solid #fc3130;
+    border-radius: 15px;
+    cursor: pointer;
+    font-weight: 500;
+    text-align: center;
+    transition: 200ms;
+}
+
+.juego-button:hover {
+    color: #fff;
+    background-color: #fc3130;
+}
+
+.juego-button:disabled:hover{
+  cursor: default;
+  background-color: transparent;
+  color: #c5b7b7;
+}
+
+
+.juego-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+
+.cartas-container{
+  position: relative;
+  width: 420px; 
+  height: 280px;
+  margin: 0 auto;
+}
+
+.carta-actual {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 200px;
+}
+
+.carta-mazo {
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 200px;
+}
+
+.carta {
+  width: 200px;
+  display: block;
+}
+
+.botones {
+  display: flex;
+  gap: 15px;
+
+}
+
+@keyframes slideFromDeck {
+  from {
+    transform: translateX(220px);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+.carta-actual.slide-in {
+  animation: slideFromDeck 0.3s ease-out;
+}

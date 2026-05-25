@@ -6,10 +6,11 @@ import { About } from './components/about/about';
 import { studentExists } from './guards/studentExists';
 import { authGuard } from './guards/auth';
 import { Ahorcado } from './components/ahorcado/ahorcado';
-import { Mayormenor } from './components/mayormenor/mayormenor';
+import { MayorMenor } from './components/mayormenor/mayormenor';
 import { Preguntados } from './components/preguntados/preguntados';
 import { Nanograma } from './components/nanograma/nanograma';
 import { guestGuard } from './guards/guest';
+import { SalaChat } from './components/sala-chat/sala-chat';
 
 export const routes: Routes = [
     { path:'login', component: Login, canActivate: [guestGuard] },
@@ -24,13 +25,15 @@ export const routes: Routes = [
 
         { path:'ahorcado', component: Ahorcado },
         
-        { path:'mayormenor', component: Mayormenor},
+        { path:'mayormenor', component: MayorMenor},
 
         { path:'preguntados', component: Preguntados},
 
         {path:'nanograma', component: Nanograma}
 
     ] },
+
+    { path:'chat', canActivate: [authGuard], component: SalaChat },
 
     {path:'', redirectTo:'home', pathMatch:'full'},
 

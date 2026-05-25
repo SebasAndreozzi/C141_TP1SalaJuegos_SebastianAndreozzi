@@ -1,0 +1,31 @@
+<main>
+
+  <h2>Sala de chat</h2>
+
+  <div class="chat-container">
+
+    <div class="user-name">
+      <img src="favicon.ico" alt="manzana">
+      <h3>{{userName()}}</h3>
+    </div>
+
+    <div class="messages-wrapper">
+      <div class="messages-list">
+        @for (msg of chatService.mensajes(); track msg.id) {
+          <div class="message-item">
+            <span class="user-tag" [appMensajePropio]="msg.user_name" [usuarioActivo]="userName()">{{ msg.user_name }} </span>
+            <span class="msg-time" [appMensajePropio]="msg.user_name" [usuarioActivo]="userName()">[{{ msg.created_at | dateHour }}]: </span>
+            <span class="content">{{ msg.contenido }}</span>
+          </div>
+        }
+      </div>
+    </div>
+
+    <div class="input-area">
+      <input class="message-box" [(ngModel)]="newMessage" (keyup.enter)="enviar()" placeholder="Escribe un mensaje..." />
+      <button (click)="enviar()" [disabled]="!userName()">Enviar</button>
+    </div>
+
+  </div>
+
+</main>

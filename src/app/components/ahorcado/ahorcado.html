@@ -1,1 +1,39 @@
-<p>ahorcado works!</p>
+<main>
+  <h2>Ahorcado</h2>
+  @if(!juegoIniciado()){
+    <div class="pantalla-inicio">
+      <img src="assets/ahorcado/inicio.png" alt="arbol-inicio">
+      <button class="juego-button" (click)="iniciarJuego()"> Iniciar Juego </button>
+    </div>
+  }@else{
+
+    <div class="juego-container">
+
+      @if(gano()){
+        <img src="assets/ahorcado/victoria.png">
+      }@else{
+        <img src="assets/ahorcado/{{(6 - intentosRestantes)}}.png">
+      }
+
+      <div class="juego">
+        <div class="zona-superior"></div>
+
+        <div class="palabra">
+          @for (letra of mostrarPalabra(); track $index) {
+            <span>{{ letra }}</span>
+          }
+        </div>
+
+        <div class="teclado">
+
+          @for (letra of abecedario; track letra) {
+            <button (click)="seleccionarLetra(letra)" [disabled]=" letrasElegidas.includes(letra) || rondaTerminada() ">{{ letra }}</button>
+          }
+
+        </div>
+      </div>
+    </div>
+  }
+  
+
+</main>
