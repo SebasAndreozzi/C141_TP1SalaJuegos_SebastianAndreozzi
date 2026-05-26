@@ -134,7 +134,7 @@ export class Preguntados {
           <div style="font-size: 1.2rem; margin-bottom: 1rem;">
             Puntaje final: ${this.puntaje()}
           </div>
-          <img src="/assets/preguntados/fin.png" alt="Imagen final" style="max-width: 150px;">
+          <img src="/assets/preguntados/fin.png" alt="Imagen final" style="max-width: 200px;">
         `,
         showCancelButton: true,
         confirmButtonText: 'Reiniciar',
